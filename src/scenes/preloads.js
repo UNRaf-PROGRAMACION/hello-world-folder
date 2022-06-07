@@ -1,5 +1,5 @@
 // Clase Preloads, para separar los preloads y tener mejor orden
-
+import Button from "../js/button.js";
 // Se extiende de Phaser.Scene para que adquiera todas las caracteristicas de una escena
 // -> mostrar, recargar, tener los eventos preload, create y update.
 

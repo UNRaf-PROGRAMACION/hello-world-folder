@@ -1,4 +1,5 @@
-// Clase MainMenu, donde se crean los botones, el logo y el fondo del menú principal
+import Button from "../js/button.js";
+
 export class MainMenu extends Phaser.Scene {
   constructor() {
     // Se asigna una key para despues poder llamar a la escena
@@ -21,5 +22,17 @@ export class MainMenu extends Phaser.Scene {
       this.cameras.main.centerY / 1.5,
       "phaser_logo"
     );
+
+    const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/2, 'Juego', this, () => {
+      // Instrucción para pasar a la escena Play
+      this.scene.start("Seleccion");
+      
+    });
+
+    const boton2 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/1, 'Créditos', this, () => {
+      // Instrucción para pasar a la escena Play
+      this.scene.start("Creditos");
+      
+    });
   }
 }
