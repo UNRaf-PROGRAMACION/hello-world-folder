@@ -18,12 +18,12 @@ export class Tablero extends Phaser.Scene {
         this.scene.start("Escenario2");
     });
 
-    const boton3 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/1, 'Carta: Escenario 3', this, () => {
+    const boton3 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/1.07, 'Carta: Escenario 3', this, () => {
       // Instrucción para pasar a la escena Play
       this.scene.start("Escenario3");
   });
 
-    const boton5 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.699, 'Carta que te salva', this, () => {
+    const boton5 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.832, 'Carta que te salva', this, () => {
       // Instrucción para pasar a la escena Play
       this.scene.start("Comodin");
   });

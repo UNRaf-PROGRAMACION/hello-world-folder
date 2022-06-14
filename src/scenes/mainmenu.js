@@ -19,17 +19,17 @@ export class MainMenu extends Phaser.Scene {
     // Logo de Phaser
     this.add.image(
       this.cameras.main.centerX,
-      this.cameras.main.centerY / 1.5,
+      this.cameras.main.centerY / 1.30,
       "phaser_logo"
     );
 
-    const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/2, 'Juego', this, () => {
+    const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.8, 'Juego', this, () => {
       // Instrucción para pasar a la escena Play
       this.scene.start("Seleccion");
       
     });
 
-    const boton2 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/1, 'Créditos', this, () => {
+    const boton2 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.7, 'Créditos', this, () => {
       // Instrucción para pasar a la escena Play
       this.scene.start("Creditos");
       
