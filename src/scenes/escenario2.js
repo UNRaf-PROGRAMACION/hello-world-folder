@@ -14,7 +14,7 @@ export class Escenario2 extends Phaser.Scene {
     
         const boton2 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/2, 'Victoria', this, () => {
             // Instrucción para pasar a la escena Play
-            this.scene.start("Tablero");
+            this.scene.start("Dado");
         });  
 
     }
