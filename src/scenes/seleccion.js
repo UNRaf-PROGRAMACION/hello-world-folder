@@ -8,6 +8,8 @@ export class Seleccion extends Phaser.Scene {
   
     create() {
   
+      this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"inicio")
+      
       const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/2, 'Un jugador', this, () => {
         // Instrucción para pasar a la escena Play
         this.scene.start("Tablero");
