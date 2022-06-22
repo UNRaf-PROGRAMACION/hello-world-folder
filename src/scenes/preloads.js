@@ -17,24 +17,30 @@ export class Preloads extends Phaser.Scene {
     this.load.image("configuracion", "public/assets/images/Configuración.png");
     this.load.image("idioma", "public/assets/images/idiomas.png");
     this.load.image("completo", "public/assets/images/JUEGO COMPLETADO.png");
-    this.load.image("dude", "public/assets/images/personaje.png");
+    
+    this.load.spritesheet("dude", "public/assets/images/personaje.png", {
+      frameWidth: 259.25,
+      frameHeight: 300,
+    });
+    
+
   }
 
   create() {
-
+    
     this.anims.create({
-      key: "up",
-      frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 3 }),
-      frameRate: 10,
+      key: "run",
+      frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 2 }),
+      frameRate: 20,
       repeat: -1,
     });
-
+   
     this.anims.create({
-      key: "turn",
-      frames: [{ key: "dude", frame: 4 }],
+      key: "jump",
+      frames: [{ key: "dude", frame: 3 }],
       frameRate: 20,
     });
-
+    
 
     this.scene.start("MainMenu");
   }

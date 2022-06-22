@@ -3,6 +3,7 @@ var enemys;
 var cursors;
 var gameOver;
 var count;
+var isJumping;
 //var scoreTime;
 //var scoreTimeText;
 //var timedEvent;
@@ -17,18 +18,18 @@ export class Escenario1 extends Phaser.Scene {
 
     preload() {
       this.load.tilemapTiledJSON("map1", "public/assets/tilemaps/map.json");
-      this.load.image("tilesBelow1", "public/assets/images/jungla-atlas.png");
+      this.load.image("tilesBelow1", "public/assets/images/x.png");
       this.load.image("tilesPlatform1", "public/assets/images/floor-atlas.png");
     
     }
 
     create() {
 
-      this.cameras.main.setBounds(0, 0, 3392, 100);
+      this.cameras.main.setBounds(0, 0, 0, 0);
   
       const map1 = this.make.tilemap({ key: "map1" });
 
-      const tilesetBelow1 = map1.addTilesetImage("jungla-atlas", "tilesBelow1");
+      const tilesetBelow1 = map1.addTilesetImage("sky2_atlas", "tilesBelow1");
   
       const tilesetPlatform1 = map1.addTilesetImage(
         "floor-atlas",
@@ -46,18 +47,22 @@ export class Escenario1 extends Phaser.Scene {
       player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude");
 
       player.setCollideWorldBounds(true);
+      player.anims.play("run");
+      
+      
+      isJumping = false
 
       this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
     
       this.cameras.main.setZoom(4);
       
-      if ((cursors = !undefined)) {
-        cursors = this.input.keyboard.createCursorKeys();
-      }
+
+      cursors = this.input.keyboard.createCursorKeys();
+    
 
       enemys = this.physics.add.group();
 
-      const { x = 0, y = 0, name, type } = objData;
+      /* const { x = 0, y = 0, name, type } = objData;
       switch (name) {
         case "enemy": {
 
@@ -65,7 +70,8 @@ export class Escenario1 extends Phaser.Scene {
           
           break;
         }
-      }  
+      } 
+      */ 
 
       this.physics.add.collider(player, worldLayer);
       this.physics.add.collider(enemys, worldLayer);
@@ -76,62 +82,58 @@ export class Escenario1 extends Phaser.Scene {
       count = 0;
     }
 
-    update(){
+    hitEnemy(player,enemy) {
 
-      if (gameOver) {
-        return;
-      }
+      count = count + 1;
 
-      this.player.setVelocity(100);
-
-      //VER ANIMACIONES
-      if (cursors.up.isDown && player.body.blocked.down) {
-        player.setVelocityY(-330);
+      this.physics.pause();
   
-        player.anims.play("up", true);
-        
-      }else {
-        player.setVelocityX(100);
+      player.setTint(0xff0000);
+    
+      player.anims.play("jump");
+
+      setTimeout(() => {
+        this.physics.start();
   
-        player.anims.play("turn"); 
-      }
-    
-
-      hitEnemy(player,enemy) ;{
-
-        count = count + 1;
-
-        setTimeout(() => {
-         
-          this.physics.pause();
-    
-          player.setTint(0xff0000);
+        player.clearTint();
       
-          player.anims.play("turn");
-      
-        }, 100); 
+        player.anims.play("run");
+
+      }, 100); 
+    }
+
+  update(){
+    
+    player.setVelocityX(100);
+
+    if (gameOver) {
+      return;
+    };
+
+    if (cursors.up.isDown && player.body.blocked.down) {
+      player.setVelocityY(-330);
+      player.anims.play("jump");
+      isJumping = true;
+    } else {
+      if (isJumping && player.body.blocked.down) {
+        player.anims.play("run");
+        isJumping = false;
       }
+    }
 
     if (count === 3){
     
       gameOver= true 
 
       setTimeout(() => {
-         
+        
         this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,);
 
         const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/1, 'Derrota', this, () => {
           // Instrucción para pasar a la escena Play
           this.scene.start("Mainmenu");
-      });
-    
+      });   
       }, 1000); 
-
     }
-      
-    const boton2 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/2, 'Victoria', this, () => {
-        // Instrucción para pasar a la escena Play
-        this.scene.start("Dado");
-    });
-    }
+  }
 }
