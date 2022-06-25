@@ -106,8 +106,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":848,
-                 "y":893.545454545455
+                 "x":330,
+                 "y":906
                 }, 
                 {
                  "height":0,
@@ -118,8 +118,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":200,
-                 "y":862.166666666667
+                 "x":208,
+                 "y":910
                 }, 
                 {
                  "height":0,
@@ -130,8 +130,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":80,
-                 "y":862.833333333333
+                 "x":70.6666666666667,
+                 "y":855.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -149,7 +149,7 @@
         {
          "columns":45,
          "firstgid":1,
-         "image":"..\/images\/cueva-atlas.png",
+         "image":"cueva-atlas.png",
          "imageheight":800,
          "imagewidth":1440,
          "margin":0,
@@ -162,7 +162,7 @@
         {
          "columns":6,
          "firstgid":1126,
-         "image":"..\/images\/casilla-atlas.png",
+         "image":"casilla-atlas.png",
          "imageheight":112,
          "imagewidth":200,
          "margin":0,

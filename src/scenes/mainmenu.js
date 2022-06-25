@@ -1,5 +1,3 @@
-import Button from "../js/button.js";
-
 export class MainMenu extends Phaser.Scene {
   constructor() {
     // Se asigna una key para despues poder llamar a la escena
@@ -7,20 +5,65 @@ export class MainMenu extends Phaser.Scene {
   }
 
   create() {
-    // Fondo del menú principal
+ /*
+  let audio = this.sound.add('theme', {loop: true});
+  audio.play();
+*/
 
-    this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"inicio")
 
-    const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.8, 'Juego', this, () => {
-      // Instrucción para pasar a la escena Play
-      this.scene.start("Escenario1");
-      
-    });
+  var Jugar;
+  
+  
+  this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"inicio"); 
+  
 
-    const boton2 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.7, 'Créditos', this, () => {
-      // Instrucción para pasar a la escena Play
-      this.scene.start("Creditos");
-      
-    });
+  Jugar = this.add.image(this.cameras.main.centerX/1.04,this.cameras.main.centerY/0.644,"jugar").setInteractive()
+  
+  .on('pointerdown', () => {
+  
+      this.scene.start("Instrucciones")
+    })
+
+  .on('pointerover', () => {
+      Jugar.setScale(1.1)
+    })
+
+  .on('pointerout', () => {
+      Jugar.setScale(1)
+    })
+
+    var creditos;
+
+    creditos = this.add.image(this.cameras.main.centerX/1.04,this.cameras.main.centerY/0.535,"credito").setInteractive()
+  
+    .on('pointerdown', () => {
+    
+        this.scene.start("Creditos")
+      })
+  
+    .on('pointerover', () => {
+        creditos.setScale(1.1)
+      })
+  
+    .on('pointerout', () => {
+        creditos.setScale(1)
+      })
+
+      var rueda;
+      rueda = this.add.image(1830,80,"tuerca").setInteractive()
+
+      .on('pointerdown', () => {
+    
+        this.scene.start("Configuraciones")
+      })
+  
+      .on('pointerover', () => {
+        rueda.setScale(1.1)
+      })
+  
+      .on('pointerout', () => {
+        rueda.setScale(1)
+      })
   }
+  
 }

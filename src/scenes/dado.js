@@ -1,17 +1,19 @@
 import Button from "../js/button.js";
 
-export class Dado extends Phaser.Scene {
+export class Comodin extends Phaser.Scene {
     constructor() {
       // Se asigna una key para despues poder llamar a la escena
-      super("Dado");
+      super("Comodin");
     }
-  
+  }
+  /*
     create() {
   
-      const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY, 'Tirar dados', this, () => {
+      const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY, 'Avanzas libremente', this, () => {
         // Instrucción para pasar a la escena Play
-        this.scene.start("Tablero");
+        this.scene.start("Dado");
     });
 
     }
   }
+  */

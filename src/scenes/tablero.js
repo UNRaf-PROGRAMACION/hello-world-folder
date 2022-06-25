@@ -1,3 +1,7 @@
+var player;
+var number;
+
+
 import Button from "../js/button.js";
 
 export class Tablero extends Phaser.Scene {
@@ -7,16 +11,22 @@ export class Tablero extends Phaser.Scene {
     }
     preload() {
       this.load.tilemapTiledJSON("map", "public/assets/tilemaps/tablero.json");
-      this.load.image("tilesBelow", "public/assets/images/jungla-atlas.png");
-      this.load.image("tilesPlatform", "public/assets/images/floor-atlas.png");
+      this.load.image("tilesBelow", "public/assets/images/cueva-atlas.png");
+      this.load.image("tilesPlatform", "public/assets/images/casilla-atlas.png");
     }
     create() {
+      /*
+      setTimeout(() => {
+        
+        this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"instrucciones");
+        }, 50000); 
+        */
       const map = this.make.tilemap({ key: "map" });
 
-      const tilesetBelow = map.addTilesetImage("jungla-atlas", "tilesBelow");
+      const tilesetBelow = map.addTilesetImage("cueva-atlas", "tilesBelow");
   
       const tilesetPlatform = map.addTilesetImage(
-        "floor-atlas",
+        "casilla-atlas",
         "tilesPlatform"
       );
   
@@ -25,32 +35,52 @@ export class Tablero extends Phaser.Scene {
       const objectsLayer = map.getObjectLayer("Objetos");
   
       worldLayer.setCollisionByProperty({ collides: true });
+
+      this.cameras.main.setBounds(0, 0, 1920, 1080);
+
+      const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "casilla1");
+
+      this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude").setCollideWorldBounds(true);
   
-      const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "dude");
+      this.physics.add.collider(this.player, worldLayer);
 
+      this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
+      this.cameras.main.setZoom(2);
 
-      const { x = 0, y = 0, name, type } = objData;
-      switch (name) {
-        case "star": {
-          // add star to scene
-          // console.log("estrella agregada: ", x, y);
-          var star = stars.create(x, y, "star");
-          star.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-          break;
-        }
-      }
+      const boton = new Button(200, 600, 'Lanzar dado', this, () => {
 
-      const botonDado = new Button(this.cameras.main.centerX, this.cameras.main.centerY, 'Tirar dado', this, () => {
-        // Instrucción para pasar a la escena Play
-        this.scene.start("");
-    });
+        this.game.time.events.add(Phaser.Timer.SECOND * 4, this.updateTexto, this);
+        this.player.setX(this.player.x + 128 * valor);
+      });
 
-
+      boton.inputEnabled = false; 
+      
     }
+
+    dado(){
+      
+    let valor = Phaser.Math.Between(1, 6);
+
+    number = this.add.text(464, 800, valor, { stroke: 'red', strokeThickness: 5, fontSize: '48px Arial', fill: 'yellow' });
+
+    //number.destroy();
+
+    //this.time.events.loop(Phaser.Timer.SECOND, updateTexto, this);
+  
+    return valor;
+  }
+
+  updateTexto(){
+    let valor = Phaser.Math.Between(1, 6);
+    number = this.add.text(464, 800, valor, { stroke: 'red', strokeThickness: 5, fontSize: '48px Arial', fill: 'yellow' });
+    number.setText(valor);
+  }
 
     update(){
 
+
+/*
   const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/2.5, 'Carta: Escenario 1', this, () => {
       // Instrucción para pasar a la escena Play
       this.scene.start("Escenario1");
@@ -65,6 +95,7 @@ export class Tablero extends Phaser.Scene {
     // Instrucción para pasar a la escena Play
     this.scene.start("Completado");
   });
-
+*/
   }
+
 }

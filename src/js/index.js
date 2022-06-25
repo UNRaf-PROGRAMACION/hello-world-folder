@@ -1,14 +1,13 @@
 import { Preloads } from "../scenes/preloads.js";
 import { MainMenu } from "../scenes/mainmenu.js";
-import { Seleccion } from "../scenes/seleccion.js";
-import { Tablero } from "../scenes/tablero.js";
-import { Dado } from "../scenes/dado.js";
-import { Escenario1 } from "../scenes/escenario1.js";
-import { Escenario2 } from "../scenes/escenario2.js";
-import { Escenario3 } from "../scenes/escenario3.js";
-import { Comodin } from "../scenes/comodin.js";
 import { Creditos } from "../scenes/creditos.js";
-import { Completado } from "../scenes/completado.js";
+import { Configuraciones } from "../scenes/configuraciones.js";
+import { Instrucciones } from "../scenes/instrucciones.js";
+import { Tablero } from "../scenes/tablero.js";
+import { Escenario1 } from "../scenes/escenario1.js";
+import { Comodin } from "../scenes/comodin.js";
+
+
 
 var config = {
   type: Phaser.AUTO,
@@ -18,24 +17,25 @@ var config = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     min: {
-      width: 1538,
-      height: 957,
+      width: 800,
+      height: 600,
     },
     max: {
-      width: 1600,
-      height: 1200,
+      width: 1280,
+      height: 720,
     },
   },
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 800 },
       debug: false,
     },
   },
   // Listado de todas las escenas del juego, en orden
   // La primera escena es con la cual empieza el juego
-  scene: [Preloads, MainMenu, Seleccion, Tablero, Dado, Escenario1, Escenario2, Escenario3, Comodin, Creditos, Completado],
+  scene: [Preloads, MainMenu, Configuraciones, Instrucciones, Tablero, Escenario1, Comodin, Creditos],
 };
 
 var game = new Phaser.Game(config);
+

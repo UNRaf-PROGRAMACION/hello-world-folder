@@ -17,9 +17,9 @@ export class Escenario1 extends Phaser.Scene {
     }
 
     preload() {
-      this.load.tilemapTiledJSON("map1", "public/assets/tilemaps/map.json");
-      this.load.image("tilesBelow1", "public/assets/images/x.png");
-      this.load.image("tilesPlatform1", "public/assets/images/floor-atlas.png");
+      this.load.tilemapTiledJSON("map1", "public/assets/tilemaps/esc1.json");
+      this.load.image("tilesBelow1", "public/assets/images/jungla-atlas2.png");
+      this.load.image("tilesPlatform1", "public/assets/images/x.png");
     
     }
 
@@ -29,7 +29,7 @@ export class Escenario1 extends Phaser.Scene {
   
       const map1 = this.make.tilemap({ key: "map1" });
 
-      const tilesetBelow1 = map1.addTilesetImage("sky2_atlas", "tilesBelow1");
+      const tilesetBelow1 = map1.addTilesetImage("jungla-atlas2", "tilesBelow1");
   
       const tilesetPlatform1 = map1.addTilesetImage(
         "floor-atlas",
@@ -48,7 +48,7 @@ export class Escenario1 extends Phaser.Scene {
 
       player.setCollideWorldBounds(true);
       player.anims.play("run");
-      
+      player.setVelocityX(1000);
       
       isJumping = false
 
@@ -117,6 +117,7 @@ export class Escenario1 extends Phaser.Scene {
     } else {
       if (isJumping && player.body.blocked.down) {
         player.anims.play("run");
+      
         isJumping = false;
       }
     }
