@@ -1,12 +1,12 @@
 var player;
 var number;
+var valor;
 
 
 import Button from "../js/button.js";
 
 export class Tablero extends Phaser.Scene {
     constructor() {
-      // Se asigna una key para despues poder llamar a la escena
       super("Tablero");
     }
     preload() {
@@ -14,6 +14,8 @@ export class Tablero extends Phaser.Scene {
       this.load.image("tilesBelow", "public/assets/images/cueva-atlas.png");
       this.load.image("tilesPlatform", "public/assets/images/casilla-atlas.png");
     }
+
+    
     create() {
       /*
       setTimeout(() => {
@@ -50,32 +52,29 @@ export class Tablero extends Phaser.Scene {
 
       const boton = new Button(200, 600, 'Lanzar dado', this, () => {
 
-        this.game.time.events.add(Phaser.Timer.SECOND * 4, this.updateTexto, this);
+        number = this.add.text(464, 800, valor, { stroke: 'red', strokeThickness: 5, fontSize: '48px Arial', fill: 'yellow' });
+        let tiempo = this.time.elapsed;
+
+        while ( (this.time.elapsed - tiempo) < 5 ){
+
+          console.log(tiempo);
+          this.updateTexto();
+          tiempo = this.time.elapsed;
+        }
+
         this.player.setX(this.player.x + 128 * valor);
+        //number.destroy();
       });
 
       boton.inputEnabled = false; 
       
     }
+    updateTexto(){
+      valor = Phaser.Math.Between(1, 6);
+      number.setText(valor);
+    }
 
-    dado(){
-      
-    let valor = Phaser.Math.Between(1, 6);
 
-    number = this.add.text(464, 800, valor, { stroke: 'red', strokeThickness: 5, fontSize: '48px Arial', fill: 'yellow' });
-
-    //number.destroy();
-
-    //this.time.events.loop(Phaser.Timer.SECOND, updateTexto, this);
-  
-    return valor;
-  }
-
-  updateTexto(){
-    let valor = Phaser.Math.Between(1, 6);
-    number = this.add.text(464, 800, valor, { stroke: 'red', strokeThickness: 5, fontSize: '48px Arial', fill: 'yellow' });
-    number.setText(valor);
-  }
 
     update(){
 
