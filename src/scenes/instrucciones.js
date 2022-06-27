@@ -5,13 +5,14 @@ export class Instrucciones extends Phaser.Scene {
   }
 
   create() {
-    
+
+  this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, "cueva2");
   this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, "dale");
 
   setTimeout(() => {
     this.scene.start(
-        "Tablero",
+        "Tablero",{distancia : 80}
     );
-    }, 8000); 
+    }, 1000); 
 }
 }

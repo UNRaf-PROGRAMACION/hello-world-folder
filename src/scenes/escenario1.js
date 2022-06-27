@@ -1,5 +1,6 @@
 var player;
 var enemys;
+var snakes;
 var cursors;
 var gameOver;
 var count;
@@ -18,21 +19,21 @@ export class Escenario1 extends Phaser.Scene {
 
     preload() {
       this.load.tilemapTiledJSON("map1", "public/assets/tilemaps/esc1.json");
-      this.load.image("tilesBelow1", "public/assets/images/jungla-atlas2.png");
-      this.load.image("tilesPlatform1", "public/assets/images/x.png");
+      this.load.image("tilesBelow1", "public/assets/images/jungla-atlas.png");
+      this.load.image("tilesPlatform1", "public/assets/images/plataforma.png");
     
     }
 
     create() {
 
-      this.cameras.main.setBounds(0, 0, 0, 0);
+      
   
       const map1 = this.make.tilemap({ key: "map1" });
 
-      const tilesetBelow1 = map1.addTilesetImage("jungla-atlas2", "tilesBelow1");
+      const tilesetBelow1 = map1.addTilesetImage("jungla-atlas", "tilesBelow1");
   
       const tilesetPlatform1 = map1.addTilesetImage(
-        "floor-atlas",
+        "plataforma",
         "tilesPlatform1"
       );
   
@@ -44,46 +45,60 @@ export class Escenario1 extends Phaser.Scene {
   
       const spawnPoint = map1.findObject("Objetos", (obj) => obj.name === "dude");
 
-      player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude");
+      player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude")
+      .setCircle(50, 40, 40)
+      
 
-      player.setCollideWorldBounds(true);
+      //player.setCollideWorldBounds(true);
       player.anims.play("run");
-      player.setVelocityX(1000);
+      
       
       isJumping = false
 
-      this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
+      this.cameras.main.startFollow(player, true, 0.08, 0.08);
     
-      this.cameras.main.setZoom(4);
-      
+      this.cameras.main.setZoom(1.5);
+      this.cameras.main.setBounds(0, 0, 3200, 1080);
 
       cursors = this.input.keyboard.createCursorKeys();
     
 
       enemys = this.physics.add.group();
+      snakes = this.physics.add.group();
 
-      /* const { x = 0, y = 0, name, type } = objData;
+      objectsLayer.objects.forEach((objData) => {
+
+      const { x = 0, y = 0, name, type } = objData;
       switch (name) {
         case "enemy": {
 
-          var enemy = enemys.create(x, y, "enemy");
+          var enemy = enemys.create(x, y, "roca");
+          
+          break;
+        }
+        case "snake": {
+
+          var snake = snakes.create(x, y, "snake");
           
           break;
         }
       } 
-      */ 
+    });
 
+       
       this.physics.add.collider(player, worldLayer);
       this.physics.add.collider(enemys, worldLayer);
+      this.physics.add.collider(snakes, worldLayer);
   
       this.physics.add.overlap(player, enemys, this.hitEnemy, null, this);
+      this.physics.add.overlap(player, snakes, this.hitSnake, null, this);
   
       gameOver = false;
       count = 0;
     }
 
     hitEnemy(player,enemy) {
-
+      enemy.destroy();
       count = count + 1;
 
       this.physics.pause();
@@ -91,15 +106,39 @@ export class Escenario1 extends Phaser.Scene {
       player.setTint(0xff0000);
     
       player.anims.play("jump");
-
+      console.log(count);
       setTimeout(() => {
-        this.physics.start();
+
+        this.physics.resume();
   
         player.clearTint();
-      
+        
         player.anims.play("run");
+        console.log(count);
 
-      }, 100); 
+      }, 1000); 
+    }
+
+    hitSnake(player,snake) {
+      snake.destroy();
+      count = count + 1;
+
+      this.physics.pause();
+  
+      player.setTint(0xff0000);
+    
+      player.anims.play("jump");
+      console.log(count);
+      setTimeout(() => {
+
+        this.physics.resume();
+  
+        player.clearTint();
+        
+        player.anims.play("run");
+        console.log(count);
+
+      }, 1000); 
     }
 
   update(){
@@ -111,13 +150,14 @@ export class Escenario1 extends Phaser.Scene {
     };
 
     if (cursors.up.isDown && player.body.blocked.down) {
-      player.setVelocityY(-330);
+      player.setVelocityY(-570);
+      player.setVelocityX(200);
       player.anims.play("jump");
       isJumping = true;
     } else {
       if (isJumping && player.body.blocked.down) {
         player.anims.play("run");
-      
+        player.setVelocityX(100);
         isJumping = false;
       }
     }
@@ -127,13 +167,9 @@ export class Escenario1 extends Phaser.Scene {
       gameOver= true 
 
       setTimeout(() => {
-        
+        this.scene.start("Tablero");
         this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,);
-
-        const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/1, 'Derrota', this, () => {
-          // Instrucción para pasar a la escena Play
-          this.scene.start("Mainmenu");
-      });   
+   
       }, 1000); 
     }
   }

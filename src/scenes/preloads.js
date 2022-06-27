@@ -11,7 +11,8 @@ export class Preloads extends Phaser.Scene {
 
   preload() {
 
-    this.load.image("fondoJungla", "public/assets/images/jungla.png");
+    this.load.image("cueva", "public/assets/images/cueva1.PNG");
+    this.load.image("cueva2", "public/assets/images/cueva22.png");
     this.load.image("inicio", "public/assets/images/dibujo.png");
     this.load.image("inicio2", "public/assets/images/bitmap.png");
     this.load.image("jugar", "public/assets/images/boton jugar.png");
@@ -22,14 +23,21 @@ export class Preloads extends Phaser.Scene {
     this.load.image("dale", "public/assets/images/Intrucciones.png");
     this.load.image("opciones", "public/assets/images/confi1.png");
     this.load.image("punto", "public/assets/images/puntito.png");
-    //this.load.image("idioma", "public/assets/images/idiomas.png");
+    this.load.image("cueva", "public/assets/images/cueva.png");
+    this.load.image("tirardado", "public/assets/images/tirardado.png");
+    this.load.image("cuadro", "public/assets/images/cuadro2.jpg");
+    this.load.image("carta", "public/assets/images/carta.png");
     this.load.image("completo", "public/assets/images/JUEGO COMPLETADO.png");
-    
-    this.load.spritesheet("dude", "public/assets/images/personaje1.png", {
-      frameWidth: 90.5,
-      frameHeight: 100,
+    this.load.image("roca", "public/assets/images/PIEDRAS2.png");
+    this.load.image("snake", "public/assets/images/snake.png");
+    //this.load.image("roca", "public/assets/images/PIEDRAS.png");
+    this.load.image("prota", "public/assets/images/prota.png");
+    this.load.spritesheet("dude", "public/assets/images/spritesheet11.png", {
+      frameWidth: 150,
+      frameHeight: 155,
     });
 
+  
     this.load.audio("theme", "public/assets/sounds/musica.mp3");
 
   }
@@ -39,17 +47,18 @@ export class Preloads extends Phaser.Scene {
     this.anims.create({
       key: "run",
       frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 2 }),
-      frameRate: 20,
+      frameRate: 10,
       repeat: -1,
     });
    
     this.anims.create({
       key: "jump",
-      frames: [{ key: "dude", frame: 3 }],
-      frameRate: 20,
+      frames: [{ key: "dude", frame: 1 }],
+      frameRate: 10,
     });
     
 
-    this.scene.start("Tablero");
+    this.scene.start("MainMenu", {distancia:80}
+    );
   }
 }
