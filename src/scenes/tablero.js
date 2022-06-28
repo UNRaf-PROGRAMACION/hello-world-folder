@@ -132,7 +132,7 @@ export class Tablero extends Phaser.Scene {
     }
     
     updateTexto(){
-      valor = Phaser.Math.Between(15, 15);
+      valor = Phaser.Math.Between(1, 6);
      
     }
 
