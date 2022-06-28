@@ -14,7 +14,7 @@ export class MainMenu extends Phaser.Scene {
   var Jugar;
   
   this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"cueva");
-  this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"inicio"); 
+  this.add.image(this.cameras.main.centerX/1,this.cameras.main.centerY/1.8,"inicio"); 
   
 
   Jugar = this.add.image(this.cameras.main.centerX/1.04,this.cameras.main.centerY/0.644,"jugar").setInteractive()

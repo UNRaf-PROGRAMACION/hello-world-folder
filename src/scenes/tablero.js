@@ -1,9 +1,10 @@
-var player;
+
 var number;
 var valor;
 var distancia;
 var boton;
 var cuadro;
+var final;
 
 
 import Button from "../js/button.js";
@@ -15,7 +16,7 @@ export class Tablero extends Phaser.Scene {
     preload() {
       this.load.tilemapTiledJSON("map", "public/assets/tilemaps/tablero.json");
       this.load.image("tilesBelow", "public/assets/images/cueva-atlas.png");
-      this.load.image("tilesPlatform", "public/assets/images/casilla-atlas.png");
+      this.load.image("tilesPlatform", "public/assets/images/casilas atlas.png");
     }
 
     init(data) {
@@ -33,7 +34,7 @@ export class Tablero extends Phaser.Scene {
       const tilesetBelow = map.addTilesetImage("cueva-atlas", "tilesBelow");
   
       const tilesetPlatform = map.addTilesetImage(
-        "casilla-atlas",
+        "casilas atlas",
         "tilesPlatform"
       );
   
@@ -44,11 +45,14 @@ export class Tablero extends Phaser.Scene {
       worldLayer.setCollisionByProperty({ collides: true });
 
 
-      //const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "casilla1");
+      const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "final");
+      final = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "banderaTablero");
+
 
       this.player = this.physics.add.sprite(distancia, 862.83, "prota").setCollideWorldBounds(true);
   
       this.physics.add.collider(this.player, worldLayer);
+      this.physics.add.collider(final, worldLayer);
       
       this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
@@ -56,21 +60,20 @@ export class Tablero extends Phaser.Scene {
 
       this.cameras.main.setBounds(0, 0, 1920, 1080);
 
-      console.log(this.cameras.main);
+      this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
 
-      boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 200 ,"tirardado").setInteractive().setOrigin(0,5)
-      //this.anims.tween({target: this.cameras.main}).onCompleted(()=>{
-      //boton.setX()
-      //})
+      boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 200 ,"dado").setInteractive().setOrigin(0.5)
+
       .on('pointerdown', () => {
+        
         boton.destroy()
         this.updateTexto()
-        cuadro = this.add.image(478, 830, "cuadro")
-        number = this.add.text(464, 800, valor, { stroke: 'black', strokeThickness: 5, fontSize: '48px Arial', fill: 'grey' })
+        //cuadro = this.add.image(478, 830, "cuadro")
+        number = this.add.text(distancia - 10, this.player.y - 220, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
         console.log(distancia)
         setTimeout(() => {
           number.destroy()
-          cuadro.destroy()
+          //cuadro.destroy()
           this.player.setX(distancia + 128 * valor)
           }, 3000)
 
@@ -86,53 +89,31 @@ export class Tablero extends Phaser.Scene {
         .on('pointerout', () => {
           boton.setScale(1)
         })
-        /*
-      const boton = new Button(200, 600, 'Lanzar dado', this, () => {
-
-        this.updateTexto();
-        this.add.image(464, 800, "cuadro");
-        number = this.add.text(464, 800, valor, { stroke: 'red', strokeThickness: 5, fontSize: '48px Arial', fill: 'yellow' });
-        console.log(distancia);
-        setTimeout(() => {
-          number.destroy();
-          this.player.setX(distancia + 128 * valor);
-          }, 3000);
-
-        setTimeout(() => {
-          number.destroy();
-          this.scene.start("Cartas", { distancia : this.player.x  }
-      )}, 4500);
         
-      }); 
-
-      */
     }
     
     updateTexto(){
       valor = Phaser.Math.Between(1, 6);
-      //Wnumber.setText(valor);
+     
     }
 
+    hitFinal(player, final){
+
+      boton.destroy();
+      setTimeout(() => {
+        this.add.image(distancia - 10, this.player.y - 220, "completo").setInteractive()
+        .on('pointerdown', () => {
+    
+          this.scene.start("MainMenu")
+        })
+     
+        }, 3000); 
+       
+    }
 
 
     update(){
 
-/*
-  const boton = new Button(this.cameras.main.centerX, this.cameras.main.centerY/2.5, 'Carta: Escenario 1', this, () => {
-      // Instrucción para pasar a la escena Play
-      this.scene.start("Escenario1");
-  });
-
-  const boton5 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.699, 'Carta que te salva', this, () => {
-      // Instrucción para pasar a la escena Play
-      this.scene.start("Comodin");
-  });
-
-  const boton4 = new Button(this.cameras.main.centerX, this.cameras.main.centerY/0.579, 'Final', this, () => {
-    // Instrucción para pasar a la escena Play
-    this.scene.start("Completado");
-  });
-*/
   }
 
 }

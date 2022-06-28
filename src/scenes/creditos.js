@@ -8,10 +8,10 @@ export class Creditos extends Phaser.Scene {
 
 
     create() {
-
+      this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"cueva");
       this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"creditos"); 
 
-      retroceso = this.add.image(this.cameras.main.centerX/1.379,this.cameras.main.centerY/4.4,"volver").setInteractive()
+      retroceso = this.add.image(this.cameras.main.centerX/1.372,this.cameras.main.centerY/4.09,"volver").setInteractive()
 
     .on('pointerdown', () => {
   

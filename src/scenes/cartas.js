@@ -7,12 +7,12 @@ var salvado;
 
 export class Cartas extends Phaser.Scene {
     constructor() {
-      // Se asigna una key para despues poder llamar a la escena
+     
       super("Cartas");
     }
 
     init(data) {
-      // recupera el valor SCORE enviado como dato al inicio de la escena
+      
       distancia= data.distancia;
   
       console.log(distancia);
@@ -29,14 +29,22 @@ export class Cartas extends Phaser.Scene {
       .on('pointerdown', () => {
         
         if (salvado === 1) {
-          this.scene.start("Escenario1")
+          card.destroy();
+          this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartacorrer");
+          setTimeout(() => {
+            this.scene.start("Escenario1", { distancia : distancia  }
+     
+        )}, 3000); 
+          
         }else{
           if (salvado === 2) {
-          this.scene.start("Tablero", { distancia : distancia  }
-          )}
+            card.destroy();
+            this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartabuena");
+            setTimeout(() => {
+              this.scene.start("Tablero", { distancia : distancia  }
+          )}, 3000); 
         }
-          
-      })
+      }})
   
       .on('pointerover', () => {
         card.setScale(1.1)
@@ -52,13 +60,22 @@ export class Cartas extends Phaser.Scene {
       .on('pointerdown', () => {
        
         if (salvado === 2) {
-          this.scene.start("Escenario1")
+          card2.destroy();
+          this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartacorrer");
+          setTimeout(() => {
+            this.scene.start("Escenario1", { distancia : distancia  }
+     
+        )}, 3000); 
         }else{
+
           if (salvado === 1) {
-          this.scene.start("Tablero", { distancia : distancia  }
-          )}
+            this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartabuena");
+            setTimeout(() => {
+              this.scene.start("Tablero", { distancia : distancia  }
+       
+          )}, 3000); 
+          }
         }
-          
       })
   
       .on('pointerover', () => {

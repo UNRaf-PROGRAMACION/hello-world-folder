@@ -11,7 +11,7 @@ export class Instrucciones extends Phaser.Scene {
 
   setTimeout(() => {
     this.scene.start(
-        "Tablero",{distancia : 80}
+        "Tablero",{distancia : 72}
     );
     }, 1000); 
 }
