@@ -40,7 +40,7 @@ export class Preloads extends Phaser.Scene {
     this.load.image("completo", "public/assets/images/JUEGO COMPLETADO.png");
     this.load.image("victoria", "public/assets/images/vic.png");
     this.load.image("derrota", "public/assets/images/der.png");
-    this.load.image("boton", "public/assets/images/Boton.png");
+    this.load.image("botone", "public/assets/images/Boton.png");
     this.load.image("banderaTablero", "public/assets/images/Victoria tablero.png");
     this.load.image("banderaEsc", "public/assets/images/Victoria jungla.png");
     this.load.image("roca", "public/assets/images/PIEDRAS2.png");
@@ -65,14 +65,14 @@ export class Preloads extends Phaser.Scene {
     this.anims.create({
       key: "run",
       frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 2 }),
-      frameRate: 10,
+      frameRate: 20,
       repeat: -1,
     });
    
     this.anims.create({
       key: "jump",
       frames: [{ key: "dude", frame: 1 }],
-      frameRate: 10,
+      frameRate: 20,
     });
     
     let audio = this.sound.add('theme', {loop: true});

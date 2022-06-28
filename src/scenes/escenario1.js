@@ -194,7 +194,7 @@ export class Escenario1 extends Phaser.Scene {
       this.physics.pause();
       player.anims.play("jump");
       let victory=this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "victoria");
-      let boton=this.add.image(victory.x/1.007,victory.y/0.83, "boton").setInteractive()
+      let boton=this.add.image(victory.x/1.007,victory.y/0.83, "botone").setInteractive()
 
       .on('pointerdown', () => {
         audio3.stop()
@@ -241,8 +241,9 @@ export class Escenario1 extends Phaser.Scene {
         
         this.physics.pause();
         player.anims.play("jump");
+
         let derrota=this.add.image(player.x ,player.y/1.5, "derrota")
-        let boton =this.add.image(derrota.x/1.008,derrota.y/0.82, "boton").setInteractive()
+        let boton =this.add.image(derrota.x/1.008,derrota.y/0.82, "botone").setInteractive()
         .on('pointerdown', () => {
           audio3.stop()
           this.scene.start("Preloads")

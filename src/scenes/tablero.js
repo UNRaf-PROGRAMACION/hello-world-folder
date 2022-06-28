@@ -6,6 +6,8 @@ var boton;
 var audio2;
 var final;
 var sonido;
+var musica;
+
 
 
 import Button from "../js/button.js";
@@ -62,7 +64,7 @@ export class Tablero extends Phaser.Scene {
 
       this.cameras.main.setBounds(0, 0, 1952, 1080);
 
-      var musica;
+     
       musica = this.add.image(distancia - 10, this.player.y - 250,"music2").setInteractive()
 
       .on('pointerdown', () => {
@@ -130,22 +132,37 @@ export class Tablero extends Phaser.Scene {
     }
     
     updateTexto(){
-      valor = Phaser.Math.Between(1, 6);
+      valor = Phaser.Math.Between(15, 15);
      
     }
 
     hitFinal(player, final){
 
       boton.destroy();
+      musica.destroy();
       setTimeout(() => {
-        this.add.image(distancia - 10, this.player.y - 220, "completo").setInteractive()
+        this.add.image(distancia -400, this.player.y-100, "completo");
+
+        let otro = this.add.image(distancia -410, this.player.y + 25, "botone").setInteractive()
+        
         .on('pointerdown', () => {
-    
-          this.scene.start("Preloads")
+          audio2.stop()
+          this.scene.start(
+            "Preloads")
         })
-     
-        }, 3000); 
-       
+      
+      .on('pointerover', () => {
+          otro.setScale(1.1)
+        })
+      
+      .on('pointerout', () => {
+          otro.setScale(1)
+        })
+         
+       }, 3000)
+
+   
+
     }
 
 
