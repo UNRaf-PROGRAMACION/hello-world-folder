@@ -71,7 +71,7 @@ export class Preloads extends Phaser.Scene {
     });
     
 
-    this.scene.start("Escenario1", {distancia:72}
+    this.scene.start("MainMenu", {distancia:72}
     );
   }
 }
