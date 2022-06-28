@@ -1,10 +1,11 @@
-
+var contar;
 var number;
 var valor;
 var distancia;
 var boton;
-var cuadro;
+var audio2;
 var final;
+var sonido;
 
 
 import Button from "../js/button.js";
@@ -22,7 +23,8 @@ export class Tablero extends Phaser.Scene {
     init(data) {
       
       distancia = data.distancia;
-  
+      contar=data.contar;
+      audio2=data.audio2;
       console.log(distancia);
   
     }
@@ -58,18 +60,53 @@ export class Tablero extends Phaser.Scene {
 
       this.cameras.main.setZoom(2);
 
-      this.cameras.main.setBounds(0, 0, 1920, 1080);
+      this.cameras.main.setBounds(0, 0, 1952, 1080);
+
+      var musica;
+      musica = this.add.image(distancia - 10, this.player.y - 250,"music2").setInteractive()
+
+      .on('pointerdown', () => {
+
+        if(contar===0){
+          contar = 1
+      
+          sonido = this.add.image(distancia - 10, this.player.y - 250,"mute2")
+          audio2.pause()
+        }else{
+          if (contar === 1){
+            contar = 0
+            sonido.destroy()
+            
+            audio2.resume()
+          }
+        }
+        
+      })
+
+      .on('pointerover', () => {
+          musica.setScale(1.1)
+          sonido.setScale(1.1)
+
+        
+      })
+
+      .on('pointerout', () => {
+      
+          musica.setScale(1)
+          sonido.setScale(1)
+
+      })
 
       this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
 
-      boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 200 ,"dado").setInteractive().setOrigin(0.5)
+      boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 150 ,"dado").setInteractive().setOrigin(0.5)
 
       .on('pointerdown', () => {
-        
+        musica.destroy()
         boton.destroy()
         this.updateTexto()
         //cuadro = this.add.image(478, 830, "cuadro")
-        number = this.add.text(distancia - 10, this.player.y - 220, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
+        number = this.add.text(distancia - 10, this.player.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
         console.log(distancia)
         setTimeout(() => {
           number.destroy()
@@ -78,7 +115,7 @@ export class Tablero extends Phaser.Scene {
           }, 3000)
 
         setTimeout(() => {
-          this.scene.start("Cartas", { distancia : this.player.x  }
+          this.scene.start("Cartas", { distancia : this.player.x, audio2:audio2, contar:contar  }
          )}, 5000)
         
         })
@@ -104,7 +141,7 @@ export class Tablero extends Phaser.Scene {
         this.add.image(distancia - 10, this.player.y - 220, "completo").setInteractive()
         .on('pointerdown', () => {
     
-          this.scene.start("MainMenu")
+          this.scene.start("Preloads")
         })
      
         }, 3000); 

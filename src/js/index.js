@@ -27,7 +27,7 @@ var config = {
     default: "arcade",
     arcade: {
       gravity: { y: 450 },
-      debug: true,
+      debug: false,
     },
   },
   // Listado de todas las escenas del juego, en orden

@@ -11,7 +11,7 @@ export class Preloads extends Phaser.Scene {
 
   preload() {
 
-    this.load.image("cueva", "public/assets/images/cueva1.PNG");
+    this.load.image("cueva", "public/assets/images/cueva1.png");
     this.load.image("cueva2", "public/assets/images/cueva22.png");
     //this.load.image("inicio", "public/assets/images/dibujo.png");
     this.load.image("inicio", "public/assets/images/Ruinas del tiempo.png");
@@ -22,12 +22,15 @@ export class Preloads extends Phaser.Scene {
     this.load.image("credito", "public/assets/images/credi.png");
     //this.load.image("creditos", "public/assets/images/Creditos.png");
     this.load.image("creditos", "public/assets/images/Creditos.png");
-    this.load.image("tuerca", "public/assets/images/tuerca1.png");
+    this.load.image("music", "public/assets/images/sonido.png");
+    this.load.image("mute", "public/assets/images/sin sonido.png");
+    this.load.image("music2", "public/assets/images/sonido2.png");
+    this.load.image("mute2", "public/assets/images/sin sonido2.png");
     this.load.image("volver", "public/assets/images/retroceso.png");
     this.load.image("dale", "public/assets/images/Intrucciones.png");
+    this.load.image("intro", "public/assets/images/saltar intro.png");
     //this.load.image("opciones", "public/assets/images/confi1.png");
     //this.load.image("punto", "public/assets/images/puntito.png");
-    this.load.image("cueva", "public/assets/images/cueva.png");
     //this.load.image("tirardado", "public/assets/images/tirardado.png");
     this.load.image("dado", "public/assets/images/dados.png");
     this.load.image("cuadro", "public/assets/images/cuadro2.jpg");
@@ -42,16 +45,18 @@ export class Preloads extends Phaser.Scene {
     this.load.image("banderaEsc", "public/assets/images/Victoria jungla.png");
     this.load.image("roca", "public/assets/images/PIEDRAS2.png");
     this.load.image("roca2", "public/assets/images/PIEDRAS3.png");
-    this.load.image("snake", "public/assets/images/snake.png");
+    this.load.image("snake", "public/assets/images/snake.png");;
     //this.load.image("roca", "public/assets/images/PIEDRAS.png");
     this.load.image("prota", "public/assets/images/prota.png");
-    this.load.spritesheet("dude", "public/assets/images/spritesheet11.png", {
+    this.load.spritesheet("dude", "public/assets/images/spritesheet (5).png", {
       frameWidth: 150,
       frameHeight: 155,
     });
 
   
     this.load.audio("theme", "public/assets/sounds/musica.mp3");
+    this.load.audio("theme2", "public/assets/sounds/tablero.mp3");
+    this.load.audio("theme3", "public/assets/sounds/jungla.mp3");
 
   }
 
@@ -70,8 +75,9 @@ export class Preloads extends Phaser.Scene {
       frameRate: 10,
     });
     
-
-    this.scene.start("MainMenu", {distancia:72}
+    let audio = this.sound.add('theme', {loop: true});
+    audio.play();
+    this.scene.start("MainMenu", {distancia:75, audio:audio}
     );
   }
 }

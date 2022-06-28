@@ -6,8 +6,10 @@ var final;
 var cursors;
 var gameOver;
 var count;
+var number;
 var isJumping;
 var distancia;
+var audio3;
 
 import Button from "../js/button.js";
 
@@ -31,7 +33,8 @@ export class Escenario1 extends Phaser.Scene {
     }
     create() {
 
-      
+      audio3 = this.sound.add('theme3', {loop: true});
+      audio3.play();
   
       const map1 = this.make.tilemap({ key: "map1" });
 
@@ -61,10 +64,11 @@ export class Escenario1 extends Phaser.Scene {
       const spawnPoint2 = map1.findObject("Objetos", (obj) => obj.name === "final");
       final = this.physics.add.sprite(spawnPoint2.x, spawnPoint2.y, "banderaEsc");
 
+
       this.cameras.main.startFollow(player, true, 0.08, 0.08);
     
       this.cameras.main.setZoom(1.5);
-      this.cameras.main.setBounds(0, 0, 3200, 1080);
+      this.cameras.main.setBounds(0, 0, 3200, 960);
 
       cursors = this.input.keyboard.createCursorKeys();
     
@@ -113,20 +117,22 @@ export class Escenario1 extends Phaser.Scene {
   
       gameOver = false;
       count = 0;
+      number=3;
     }
 
     hitEnemy(player,enemy) {
       enemy.destroy();
       count = count + 1;
-
+      let texto = this.add.text(player.x, player.y - 150, "Vidas: " + (number - count), { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
       this.physics.pause();
   
       player.setTint(0xff0000);
     
       player.anims.play("jump");
       console.log(count);
-      setTimeout(() => {
 
+      setTimeout(() => {
+        texto.destroy();
         this.physics.resume();
   
         player.clearTint();
@@ -134,21 +140,22 @@ export class Escenario1 extends Phaser.Scene {
         player.anims.play("run");
         console.log(count);
 
-      }, 1000); 
+      }, 900); 
     }
 
     hitRook(player,rook) {
       rook.destroy();
       count = count + 1;
-
+      let texto = this.add.text(player.x, player.y - 150, "Vidas: "+ (number - count), { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
       this.physics.pause();
   
       player.setTint(0xff0000);
     
       player.anims.play("jump");
       console.log(count);
-      setTimeout(() => {
 
+      setTimeout(() => {
+        texto.destroy();
         this.physics.resume();
   
         player.clearTint();
@@ -156,21 +163,22 @@ export class Escenario1 extends Phaser.Scene {
         player.anims.play("run");
         console.log(count);
 
-      }, 1000); 
+      }, 900); 
     }
 
     hitSnake(player,snake) {
       snake.destroy();
       count = count + 1;
-
+      let texto = this.add.text(player.x, player.y - 150, "Vidas: "+ (number - count), { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
       this.physics.pause();
   
       player.setTint(0xff0000);
     
       player.anims.play("jump");
       console.log(count);
-      setTimeout(() => {
 
+      setTimeout(() => {
+        texto.destroy();
         this.physics.resume();
   
         player.clearTint();
@@ -178,17 +186,18 @@ export class Escenario1 extends Phaser.Scene {
         player.anims.play("run");
         console.log(count);
 
-      }, 800); 
+      }, 900); 
     }
 
     hitFinal(player,final) {
       
       this.physics.pause();
       player.anims.play("jump");
-      this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "victoria");
-      let boton=this.add.image(this.cameras.main.midPoint.x/1.007,this.cameras.main.midPoint.y/0.855, "boton").setInteractive()
+      let victory=this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "victoria");
+      let boton=this.add.image(victory.x/1.007,victory.y/0.83, "boton").setInteractive()
+
       .on('pointerdown', () => {
-  
+        audio3.stop()
         this.scene.start("Tablero", { distancia : distancia }
       )
       })
@@ -228,15 +237,15 @@ export class Escenario1 extends Phaser.Scene {
       
 
       setTimeout(() => {
-        gameOver= true 
+        gameOver= true; 
         
         this.physics.pause();
         player.anims.play("jump");
-        this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota")
-        let boton =this.add.image(this.cameras.main.midPoint.x/1.017,this.cameras.main.midPoint.y/0.855, "boton").setInteractive()
+        let derrota=this.add.image(player.x ,player.y/1.5, "derrota")
+        let boton =this.add.image(derrota.x/1.008,derrota.y/0.82, "boton").setInteractive()
         .on('pointerdown', () => {
-    
-          this.scene.start("MainMenu")
+          audio3.stop()
+          this.scene.start("Preloads")
         })
         .on('pointerover', () => {
           boton.setScale(1.1)

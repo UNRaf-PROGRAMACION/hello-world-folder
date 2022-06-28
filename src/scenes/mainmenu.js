@@ -1,14 +1,24 @@
+var contar;
+var sonido;
+var audio;
+
 export class MainMenu extends Phaser.Scene {
   constructor() {
     // Se asigna una key para despues poder llamar a la escena
     super("MainMenu");
   }
+  init(data) {
+      
+    audio = data.audio;
+    contar= data.contar;
+
+
+  }
 
   create() {
- /*
-  let audio = this.sound.add('theme', {loop: true});
-  audio.play();
-*/
+ 
+ 
+  contar=0;
 
 
   var Jugar;
@@ -20,7 +30,7 @@ export class MainMenu extends Phaser.Scene {
   Jugar = this.add.image(this.cameras.main.centerX/1.04,this.cameras.main.centerY/0.644,"jugar").setInteractive()
   
   .on('pointerdown', () => {
-  
+      audio.stop();
       this.scene.start("Instrucciones")
     })
 
@@ -38,7 +48,7 @@ export class MainMenu extends Phaser.Scene {
   
     .on('pointerdown', () => {
     
-        this.scene.start("Creditos")
+        this.scene.start("Creditos", {audio:audio, contar:contar})
       })
   
     .on('pointerover', () => {
@@ -49,21 +59,39 @@ export class MainMenu extends Phaser.Scene {
         creditos.setScale(1)
       })
 
-      var rueda;
-      rueda = this.add.image(1830,80,"tuerca").setInteractive()
+      var musica;
+      musica = this.add.image(1830,80,"music").setInteractive()
 
       .on('pointerdown', () => {
-    
-        this.scene.start("Configuraciones")
+
+        if(contar===0){
+          contar = 1
+          sonido = this.add.image(1830,80,"mute")
+          audio.pause()
+        }else{
+          if (contar === 1){
+            contar = 0
+            sonido.destroy()
+            audio.resume()
+          }
+        }
+        
       })
   
       .on('pointerover', () => {
-        rueda.setScale(1.1)
+        musica.setScale(1.1)
+        sonido.setScale(1.1)
       })
   
       .on('pointerout', () => {
-        rueda.setScale(1)
+        musica.setScale(1)
+        sonido.setScale(1)
       })
   }
-  
+  update(){
+
+  }
+    
 }
+  
+
