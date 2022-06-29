@@ -132,7 +132,7 @@ export class Tablero extends Phaser.Scene {
     }
     
     updateTexto(){
-      valor = Phaser.Math.Between(1, 6);
+      valor = Phaser.Math.Between(15, 16);
      
     }
 
@@ -146,7 +146,7 @@ export class Tablero extends Phaser.Scene {
         let otro = this.add.image(distancia -410, this.player.y + 25, "botone").setInteractive()
         
         .on('pointerdown', () => {
-          audio2.stop()
+          
           this.scene.start(
             "Preloads")
         })

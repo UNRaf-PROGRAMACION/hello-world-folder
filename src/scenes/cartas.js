@@ -73,7 +73,7 @@ export class Cartas extends Phaser.Scene {
           this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartacorrer");
           
           setTimeout(() => {
-            audio2.stop()
+            audio2.stop();
             this.scene.start("Escenario1", { distancia : distancia  }
      
         )}, 3000); 
