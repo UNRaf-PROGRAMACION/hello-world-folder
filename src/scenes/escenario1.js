@@ -129,7 +129,7 @@ export class Escenario1 extends Phaser.Scene {
       player.setTint(0xff0000);
     
       player.anims.play("jump");
-      console.log(count);
+      
 
       setTimeout(() => {
         texto.destroy();
@@ -138,7 +138,7 @@ export class Escenario1 extends Phaser.Scene {
         player.clearTint();
         
         player.anims.play("run");
-        console.log(count);
+        
 
       }, 900); 
     }
@@ -152,7 +152,7 @@ export class Escenario1 extends Phaser.Scene {
       player.setTint(0xff0000);
     
       player.anims.play("jump");
-      console.log(count);
+      
 
       setTimeout(() => {
         texto.destroy();
@@ -161,8 +161,7 @@ export class Escenario1 extends Phaser.Scene {
         player.clearTint();
         
         player.anims.play("run");
-        console.log(count);
-
+        
       }, 900); 
     }
 
@@ -175,7 +174,7 @@ export class Escenario1 extends Phaser.Scene {
       player.setTint(0xff0000);
     
       player.anims.play("jump");
-      console.log(count);
+      
 
       setTimeout(() => {
         texto.destroy();
@@ -184,7 +183,7 @@ export class Escenario1 extends Phaser.Scene {
         player.clearTint();
         
         player.anims.play("run");
-        console.log(count);
+        
 
       }, 900); 
     }

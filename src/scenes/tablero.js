@@ -27,7 +27,7 @@ export class Tablero extends Phaser.Scene {
       distancia = data.distancia;
       contar=data.contar;
       audio2=data.audio2;
-      console.log(distancia);
+      
   
     }
 
@@ -109,7 +109,7 @@ export class Tablero extends Phaser.Scene {
         this.updateTexto()
         //cuadro = this.add.image(478, 830, "cuadro")
         number = this.add.text(distancia - 10, this.player.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
-        console.log(distancia)
+        
         setTimeout(() => {
           number.destroy()
           //cuadro.destroy()
@@ -132,7 +132,7 @@ export class Tablero extends Phaser.Scene {
     }
     
     updateTexto(){
-      valor = Phaser.Math.Between(15, 16);
+      valor = Phaser.Math.Between(1, 6);
      
     }
 

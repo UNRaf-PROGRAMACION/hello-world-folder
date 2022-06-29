@@ -23,9 +23,9 @@ export class Creditos extends Phaser.Scene {
       retroceso = this.add.image(this.cameras.main.centerX/1.372,this.cameras.main.centerY/4.09,"volver").setInteractive()
 
     .on('pointerdown', () => {
-  
+        
         this.scene.start("MainMenu")
-        console.log("hola")
+        
       })
   
     .on('pointerover', () => {

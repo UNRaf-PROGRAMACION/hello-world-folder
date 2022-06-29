@@ -18,7 +18,7 @@ export class Cartas extends Phaser.Scene {
       distancia= data.distancia;
       contar=data.contar;
       audio2=data.audio2;
-      console.log(distancia);
+      
   
     }
     create() {
@@ -61,7 +61,7 @@ export class Cartas extends Phaser.Scene {
       })
 
       salvado= Phaser.Math.Between(1,2);
-      console.log(salvado);
+      
       
       card = this.add.image(this.cameras.main.centerX/1.1, this.cameras.main.centerY,"carta").setInteractive()
 
