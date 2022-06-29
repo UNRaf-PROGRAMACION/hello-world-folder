@@ -47,7 +47,7 @@ export class MainMenu extends Phaser.Scene {
     creditos = this.add.image(this.cameras.main.centerX/1.04,this.cameras.main.centerY/0.535,"credito").setInteractive()
   
     .on('pointerdown', () => {
-    
+        
         this.scene.start("Creditos", {audio:audio, contar:contar})
       })
   
