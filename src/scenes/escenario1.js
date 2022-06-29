@@ -10,12 +10,12 @@ var number;
 var isJumping;
 var distancia;
 var audio3;
-
-import Button from "../js/button.js";
+var audio2;
+var contar;
 
 export class Escenario1 extends Phaser.Scene {
     constructor() {
-      // Se asigna una key para despues poder llamar a la escena
+
       super("Escenario1");
     }
 
@@ -28,7 +28,8 @@ export class Escenario1 extends Phaser.Scene {
     init(data) {
 
       distancia = data.distancia;
-  
+      contar=data.contar;
+      audio2=data.audio2;
   
     }
     create() {
@@ -197,7 +198,8 @@ export class Escenario1 extends Phaser.Scene {
 
       .on('pointerdown', () => {
         audio3.stop()
-        this.scene.start("Tablero", { distancia : distancia }
+        audio2.play()
+        this.scene.start("Tablero", { distancia : distancia, audio2:audio2, contar:contar }
       )
       })
       .on('pointerover', () => {

@@ -1,4 +1,3 @@
-import Button from "../js/button.js";
 var card;
 var card2;
 var distancia;
@@ -74,7 +73,7 @@ export class Cartas extends Phaser.Scene {
           
           setTimeout(() => {
             audio2.stop();
-            this.scene.start("Escenario1", { distancia : distancia  }
+            this.scene.start("Escenario1", { distancia : distancia, audio2:audio2, contar:contar  }
      
         )}, 3000); 
           
@@ -109,7 +108,7 @@ export class Cartas extends Phaser.Scene {
           
           setTimeout(() => {
             audio2.stop()
-            this.scene.start("Escenario1", { distancia : distancia  }
+            this.scene.start("Escenario1", { distancia : distancia, audio2:audio2, contar:contar  }
      
         )}, 3000); 
         }else{

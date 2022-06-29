@@ -8,10 +8,6 @@ var final;
 var sonido;
 var musica;
 
-
-
-import Button from "../js/button.js";
-
 export class Tablero extends Phaser.Scene {
     constructor() {
       super("Tablero");
@@ -107,12 +103,12 @@ export class Tablero extends Phaser.Scene {
         musica.destroy()
         boton.destroy()
         this.updateTexto()
-        //cuadro = this.add.image(478, 830, "cuadro")
+       
         number = this.add.text(distancia - 10, this.player.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
         
         setTimeout(() => {
           number.destroy()
-          //cuadro.destroy()
+          
           this.player.setX(distancia + 128 * valor)
           }, 3000)
 
