@@ -1,17 +1,17 @@
-var player;
-var enemys;
-var rooks;
-var snakes;
-var final;
-var cursors;
-var gameOver;
-var count;
-var number;
-var isJumping;
-var distancia;
-var audio3;
-var audio2;
-var contar;
+let player;
+let enemys;
+let rooks;
+let snakes;
+let final;
+let cursors;
+let gameOver;
+let count;
+let number;
+let isJumping;
+let distancia;
+let audio3;
+let audio2;
+let contar;
 
 export class Escenario1 extends Phaser.Scene {
     constructor() {
@@ -85,19 +85,19 @@ export class Escenario1 extends Phaser.Scene {
       switch (name) {
         case "enemy": {
 
-          var enemy = enemys.create(x, y, "roca");
+          const enemy = enemys.create(x, y, "roca");
           
           break;
         }
         case "snake": {
 
-          var snake = snakes.create(x, y, "snake");
+          const snake = snakes.create(x, y, "snake");
           
           break;
         }
         case "rook": {
 
-          var rook = rooks.create(x, y, "roca2");
+          const rook = rooks.create(x, y, "roca2");
           
           break;
         }

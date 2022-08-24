@@ -1,6 +1,6 @@
-var audio2;
-var contar;
-var sonido;
+let audio2;
+let contar;
+let sonido;
 export class Instrucciones extends Phaser.Scene {
   constructor() {
 
@@ -31,7 +31,7 @@ export class Instrucciones extends Phaser.Scene {
     intro.setScale(1)
   })
 
-  var musica;
+  let musica;
   musica = this.add.image(1830,80,"music").setInteractive()
 
   .on('pointerdown', () => {
