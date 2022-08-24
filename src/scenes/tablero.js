@@ -1,12 +1,12 @@
-var contar;
-var number;
-var valor;
-var distancia;
-var boton;
-var audio2;
-var final;
-var sonido;
-var musica;
+let contar;
+let number;
+let valor;
+let distancia;
+let boton;
+let audio2;
+let final;
+let sonido;
+let musica;
 
 export class Tablero extends Phaser.Scene {
     constructor() {

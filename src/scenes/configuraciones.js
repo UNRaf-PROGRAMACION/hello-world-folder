@@ -1,4 +1,4 @@
-var retroceso;
+let retroceso;
 
 export class Configuraciones extends Phaser.Scene {
   constructor() {
@@ -28,9 +28,9 @@ export class Configuraciones extends Phaser.Scene {
     retroceso.setScale(1)
   })
 
-var source;
-var debug;
-var target = new Phaser.Math.Vector2();
+let source;
+let debug;
+const target = new Phaser.Math.Vector2();
 
 source = this.physics.add.image(850, 550, "punto");
 

@@ -7,7 +7,7 @@ import { Tablero } from "../scenes/tablero.js";
 import { Cartas } from "../scenes/cartas.js";
 import { Escenario1 } from "../scenes/escenario1.js";
 
-var config = {
+const config = {
   type: Phaser.AUTO,
   width: 1920,
   height: 1080,
@@ -35,5 +35,5 @@ var config = {
   scene: [Preloads, MainMenu, Configuraciones, Instrucciones, Tablero, Cartas, Escenario1, Creditos],
 };
 
-var game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
 

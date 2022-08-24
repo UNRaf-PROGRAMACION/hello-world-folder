@@ -1,6 +1,6 @@
-var contar;
-var sonido;
-var audio;
+let contar;
+let sonido;
+let audio;
 
 export class MainMenu extends Phaser.Scene {
   constructor() {
@@ -21,7 +21,7 @@ export class MainMenu extends Phaser.Scene {
   contar=0;
 
 
-  var Jugar;
+  let Jugar;
   
   this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"cueva");
   this.add.image(this.cameras.main.centerX/1,this.cameras.main.centerY/1.8,"inicio"); 
@@ -42,7 +42,7 @@ export class MainMenu extends Phaser.Scene {
       Jugar.setScale(1)
     })
 
-    var creditos;
+    let creditos;
 
     creditos = this.add.image(this.cameras.main.centerX/1.04,this.cameras.main.centerY/0.535,"credito").setInteractive()
   
@@ -59,7 +59,7 @@ export class MainMenu extends Phaser.Scene {
         creditos.setScale(1)
       })
 
-      var musica;
+      let musica;
       musica = this.add.image(1830,80,"music").setInteractive()
 
       .on('pointerdown', () => {

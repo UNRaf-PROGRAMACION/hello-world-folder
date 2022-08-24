@@ -1,10 +1,10 @@
-var card;
-var card2;
-var distancia;
-var salvado;
-var contar;
-var sonido;
-var audio2;
+let card;
+let card2;
+let distancia;
+let salvado;
+let contar;
+let sonido;
+let audio2;
 
 export class Cartas extends Phaser.Scene {
     constructor() {
@@ -24,7 +24,7 @@ export class Cartas extends Phaser.Scene {
       this.cameras.main.setZoom(2.5);
       this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cueva2");
 
-      var musica;
+      let musica;
       musica = this.add.image(this.cameras.main.centerX/0.75, this.cameras.main.centerY/1.4,"music").setInteractive()
 
       .on('pointerdown', () => {
