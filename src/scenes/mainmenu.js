@@ -63,7 +63,7 @@ export class MainMenu extends Phaser.Scene {
       musica = this.add.image(1830,80,"music").setInteractive()
 
       .on('pointerdown', () => {
-
+        
         if(contar===0){
           contar = 1
           sonido = this.add.image(1830,80,"mute")
@@ -76,6 +76,7 @@ export class MainMenu extends Phaser.Scene {
           }
         }
         
+
       })
   
       .on('pointerover', () => {
@@ -87,11 +88,13 @@ export class MainMenu extends Phaser.Scene {
         musica.setScale(1)
         sonido.setScale(1)
       })
+      
   }
   update(){
-
-  }
     
+    
+  }
 }
+
   
 

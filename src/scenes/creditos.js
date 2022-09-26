@@ -2,7 +2,7 @@ let retroceso;
 let sonido;
 let contar;
 let audio;
-
+let musica;
 export class Creditos extends Phaser.Scene {
     constructor() {
    
@@ -36,7 +36,7 @@ export class Creditos extends Phaser.Scene {
         retroceso.setScale(1)
       })
 
-      let musica;
+      
       musica = this.add.image(1830,80,"music").setInteractive()
 
       .on('pointerdown', () => {
@@ -65,8 +65,11 @@ export class Creditos extends Phaser.Scene {
         sonido.setScale(1)
       })
 
+    
       
   }
-
+  update(){
+    
+  }
   
 }
