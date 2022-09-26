@@ -53,16 +53,15 @@ export class Tablero extends Phaser.Scene {
   
       this.physics.add.collider(this.player, worldLayer);
       this.physics.add.collider(final, worldLayer);
-      
+
       this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
       this.cameras.main.setZoom(2);
 
-      this.cameras.main.setBounds(0, 0, 1952, 1080);
-
-     
+      this.cameras.main.setBounds(0, 0, 1952, 1080); 
+      
       musica = this.add.image(distancia - 10, this.player.y - 250,"music2").setInteractive()
-
+      
       .on('pointerdown', () => {
 
         if(contar===0){
@@ -97,9 +96,12 @@ export class Tablero extends Phaser.Scene {
 
       this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
 
-      boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 150 ,"dado").setInteractive().setOrigin(0.5)
 
+
+      boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 150 ,"dado").setInteractive().setOrigin(0.5)
+      
       .on('pointerdown', () => {
+        
         musica.destroy()
         boton.destroy()
         this.updateTexto()
@@ -124,7 +126,12 @@ export class Tablero extends Phaser.Scene {
         .on('pointerout', () => {
           boton.setScale(1)
         })
-        
+
+        //boton.scrollFactorX= 1
+        //boton.scrollFactorY= 1
+
+
+ 
     }
     
     updateTexto(){

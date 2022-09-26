@@ -3,7 +3,6 @@ let card2;
 let distancia;
 let salvado;
 let contar;
-let sonido;
 let audio2;
 
 export class Cartas extends Phaser.Scene {
@@ -21,51 +20,19 @@ export class Cartas extends Phaser.Scene {
   
     }
     create() {
-      this.cameras.main.setZoom(2.5);
+
+      
       this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cueva2");
 
-      let musica;
-      musica = this.add.image(this.cameras.main.centerX/0.75, this.cameras.main.centerY/1.4,"music").setInteractive()
-
-      .on('pointerdown', () => {
-
-        if(contar===0){
-          contar = 1
-      
-          sonido = this.add.image(this.cameras.main.centerX/0.75, this.cameras.main.centerY/1.4,"mute")
-          audio2.pause()
-        }else{
-          if (contar === 1){
-            contar = 0
-            sonido.destroy()
-            
-            audio2.resume()
-          }
-        }
-        
-      })
-
-      .on('pointerover', () => {
-          musica.setScale(1.1)
-          sonido.setScale(1.1)
-
-        
-      })
-
-      .on('pointerout', () => {
-      
-          musica.setScale(1)
-          sonido.setScale(1)
-
-      })
-
+    
       salvado= Phaser.Math.Between(1,2);
-      
+      console.log(salvado);
       
       card = this.add.image(this.cameras.main.centerX/1.1, this.cameras.main.centerY,"carta").setInteractive()
 
+      
+
       .on('pointerdown', () => {
-        musica.destroy()
         if (salvado === 1) {
           card.destroy();
           card2.destroy();
@@ -86,6 +53,7 @@ export class Cartas extends Phaser.Scene {
               this.scene.start("Tablero", { distancia : distancia, audio2:audio2, contar:contar  }
           )}, 3000); 
         }
+        
       }})
   
       .on('pointerover', () => {
@@ -100,7 +68,7 @@ export class Cartas extends Phaser.Scene {
     card2 = this.add.image(this.cameras.main.centerX/0.95, this.cameras.main.centerY,"carta").setInteractive()
 
       .on('pointerdown', () => {
-        musica.destroy()
+        
         if (salvado === 2) {
           card2.destroy();
           card.destroy();
@@ -133,6 +101,8 @@ export class Cartas extends Phaser.Scene {
         card2.setScale(1)
 
     })
+
+    this.cameras.main.setZoom(2.5);
   }  
 
   update() {

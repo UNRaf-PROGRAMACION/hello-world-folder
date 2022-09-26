@@ -51,7 +51,7 @@ export class Preloads extends Phaser.Scene {
     this.anims.create({
       key: "run",
       frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 2 }),
-      frameRate: 20,
+      frameRate: 7,
       repeat: -1,
     });
    
