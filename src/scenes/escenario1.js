@@ -15,7 +15,7 @@ let valor;
 let audio3;
 let audio2;
 let contar;
-let texto;
+var texto;
 
 export class Escenario1 extends Phaser.Scene {
     constructor() {
@@ -41,6 +41,7 @@ export class Escenario1 extends Phaser.Scene {
     }
     create() {
 
+      
   
       audio3 = this.sound.add('theme3', {loop: true});
       audio3.play();
@@ -120,10 +121,11 @@ export class Escenario1 extends Phaser.Scene {
       this.physics.add.overlap(player, snakes, this.hitSnake, null, this);
       this.physics.add.overlap(player, final, this.hitFinal, null, this);
   
-      texto = this.add.text(10, 250, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
+      texto = this.add.text(10 - 5, 250 - 125, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
       
-      texto.setScrollFactor(0);
-      
+      //texto.setScrollFactor(0);
+      //texto.scrollFactorX= 0
+      //texto.scrollFactorY= 1
 
       gameOver = false;
 
@@ -154,7 +156,7 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
         
-        number = number - count;
+        number = 3 - count;
         texto.setText(`Vidas: ${number}`);
       }, 900); 
     }
@@ -180,7 +182,7 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
 
-        number = number - count;
+        number = 3 - count;
         texto.setText(`Vidas: ${number}`);
       }, 900); 
     }
@@ -205,7 +207,7 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
         
-        number = number - count;
+        number = 3 - count;
         texto.setText(`Vidas: ${number}`);
 
       }, 900); 
@@ -270,14 +272,14 @@ export class Escenario1 extends Phaser.Scene {
           audio3.stop()
           audio2.play()
           
-          if (turno === 0) {
-            distancia2 = distancia2 - 128 * valor;
+          if (turno === 1) {
+            distancia = distancia - (128 * valor)
+          }else{
+            if (turno === 0){
+              distancia2 = distancia2 - (128 * valor)
+            } 
           }
       
-          if (turno === 1){
-            distancia = distancia - 128 * valor;
-          } 
-
           this.scene.start("Tablero", {distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:contar})
         })
         .on('pointerover', () => {

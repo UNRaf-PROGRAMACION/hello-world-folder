@@ -52,7 +52,7 @@ export class Tablero extends Phaser.Scene {
       const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "final");
       final = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "banderaTablero");
 
-      this.player2 = this.physics.add.sprite(distancia2-10, 862.83, "prota2").setCollideWorldBounds(true);
+      this.player2 = this.physics.add.sprite(distancia2 - 5 , 862.83, "prota2").setCollideWorldBounds(true);
       this.player = this.physics.add.sprite(distancia, 862.83, "prota").setCollideWorldBounds(true);
       
   
@@ -124,7 +124,7 @@ export class Tablero extends Phaser.Scene {
           }, 3000)
 
         setTimeout(() => {
-          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:contar, turno:1   }
+          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:contar, turno:1, valor:valor   }
          )}, 5000)
 
          
