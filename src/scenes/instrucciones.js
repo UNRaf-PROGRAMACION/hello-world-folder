@@ -19,7 +19,7 @@ export class Instrucciones extends Phaser.Scene {
   .on('pointerdown', () => {
   
     this.scene.start(
-      "Tablero",{distancia : 75, audio2:audio2, contar:contar}
+      "Tablero",{distancia : 75,distancia2:75, turno:0, audio2:audio2, contar:contar}
   );
   })
 

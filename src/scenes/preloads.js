@@ -34,6 +34,7 @@ export class Preloads extends Phaser.Scene {
     this.load.image("roca2", "public/assets/images/PIEDRAS3.png");
     this.load.image("snake", "public/assets/images/snake.png");
     this.load.image("prota", "public/assets/images/prota.png");
+    this.load.image("prota2", "public/assets/images/prota2.png");
     this.load.spritesheet("dude", "public/assets/images/spritesheet (5).png", {
       frameWidth: 150,
       frameHeight: 155,
@@ -63,7 +64,7 @@ export class Preloads extends Phaser.Scene {
     
     let audio = this.sound.add('theme', {loop: true});
     audio.play();
-    this.scene.start("MainMenu", {distancia:75, audio:audio}
+    this.scene.start("MainMenu", {distancia:75, distancia2:75, turno:0, audio:audio}
     );
   }
 }

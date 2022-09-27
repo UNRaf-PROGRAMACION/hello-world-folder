@@ -9,6 +9,9 @@ let count;
 let number;
 let isJumping;
 let distancia;
+let distancia2;
+let turno;
+let valor;
 let audio3;
 let audio2;
 let contar;
@@ -29,8 +32,11 @@ export class Escenario1 extends Phaser.Scene {
     init(data) {
 
       distancia = data.distancia;
+      distancia2 = data.distancia2;
+      turno = data.turno;
       contar=data.contar;
       audio2=data.audio2;
+      valor=data.valor;
   
     }
     create() {
@@ -116,8 +122,8 @@ export class Escenario1 extends Phaser.Scene {
   
       texto = this.add.text(10, 250, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
       
-      texto.scrollFactorX=1;
-      texto.scrollFactorY=1;
+      texto.setScrollFactor(0);
+      
 
       gameOver = false;
 
@@ -215,7 +221,7 @@ export class Escenario1 extends Phaser.Scene {
       .on('pointerdown', () => {
         audio3.stop()
         audio2.play()
-        this.scene.start("Tablero", { distancia : distancia, audio2:audio2, contar:contar }
+        this.scene.start("Tablero", { distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:contar }
       )
       })
       .on('pointerover', () => {
@@ -260,8 +266,19 @@ export class Escenario1 extends Phaser.Scene {
         let derrota=this.add.image(player.x ,player.y/1.5, "derrota")
         let boton =this.add.image(derrota.x/1.008,derrota.y/0.82, "botone").setInteractive()
         .on('pointerdown', () => {
+
           audio3.stop()
-          this.scene.start("Preloads")
+          audio2.play()
+          
+          if (turno === 0) {
+            distancia2 = distancia2 - 128 * valor;
+          }
+      
+          if (turno === 1){
+            distancia = distancia - 128 * valor;
+          } 
+
+          this.scene.start("Tablero", {distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:contar})
         })
         .on('pointerover', () => {
           boton.setScale(1.1)
@@ -272,9 +289,8 @@ export class Escenario1 extends Phaser.Scene {
         })
 
       }, 1000); 
-
-      
       
     }
+    
   }
 }

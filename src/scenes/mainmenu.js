@@ -12,7 +12,6 @@ export class MainMenu extends Phaser.Scene {
     audio = data.audio;
     contar= data.contar;
 
-
   }
 
   create() {
@@ -48,7 +47,7 @@ export class MainMenu extends Phaser.Scene {
   
     .on('pointerdown', () => {
         
-        this.scene.start("Creditos", {audio:audio, contar:contar})
+        this.scene.start("Creditos", {audio:audio, contar:contar,})
       })
   
     .on('pointerover', () => {

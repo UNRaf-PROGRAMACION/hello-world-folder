@@ -2,11 +2,13 @@ let contar;
 let number;
 let valor;
 let distancia;
+let distancia2;
 let boton;
 let audio2;
 let final;
 let sonido;
 let musica;
+let turno;
 
 export class Tablero extends Phaser.Scene {
     constructor() {
@@ -21,9 +23,11 @@ export class Tablero extends Phaser.Scene {
     init(data) {
       
       distancia = data.distancia;
-      contar=data.contar;
-      audio2=data.audio2;
-      
+      distancia2 = data.distancia2;
+      turno = data.turno;
+      contar = data.contar;
+      audio2 = data.audio2;
+     
   
     }
 
@@ -48,10 +52,12 @@ export class Tablero extends Phaser.Scene {
       const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "final");
       final = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "banderaTablero");
 
-
+      this.player2 = this.physics.add.sprite(distancia2-10, 862.83, "prota2").setCollideWorldBounds(true);
       this.player = this.physics.add.sprite(distancia, 862.83, "prota").setCollideWorldBounds(true);
+      
   
       this.physics.add.collider(this.player, worldLayer);
+      this.physics.add.collider(this.player2, worldLayer);
       this.physics.add.collider(final, worldLayer);
 
       this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
@@ -95,8 +101,9 @@ export class Tablero extends Phaser.Scene {
       })
 
       this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
+      this.physics.add.overlap(this.player2, final, this.hitFinal2, null, this);
 
-
+      
 
       boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 150 ,"dado").setInteractive().setOrigin(0.5)
       
@@ -106,7 +113,9 @@ export class Tablero extends Phaser.Scene {
         boton.destroy()
         this.updateTexto()
        
-        number = this.add.text(distancia - 10, this.player.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
+        if (turno === 0) {
+          
+          number = this.add.text(distancia - 10, this.player.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
         
         setTimeout(() => {
           number.destroy()
@@ -115,8 +124,29 @@ export class Tablero extends Phaser.Scene {
           }, 3000)
 
         setTimeout(() => {
-          this.scene.start("Cartas", { distancia : this.player.x, audio2:audio2, contar:contar  }
+          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:contar, turno:1   }
          )}, 5000)
+
+         
+        }
+        
+        if (turno === 1) {
+          
+          number = this.add.text(distancia2 - 10, this.player2.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
+        
+        setTimeout(() => {
+          number.destroy()
+          
+          this.player2.setX(distancia2 + 128 * valor)
+          }, 3000)
+
+        setTimeout(() => {
+          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:contar, turno:0, valor:valor  }
+         )}, 5000)
+
+         
+        }
+        
         
         })
         .on('pointerover', () => {
@@ -163,13 +193,44 @@ export class Tablero extends Phaser.Scene {
         })
          
        }, 3000)
-
-   
-
     }
 
+    hitFinal2(player2, final){
+
+      boton.destroy();
+      musica.destroy();
+      setTimeout(() => {
+        this.add.image(distancia2 -400, this.player2.y-100, "completo");
+
+        let otro = this.add.image(distancia2 -410, this.player2.y + 25, "botone").setInteractive()
+        
+        .on('pointerdown', () => {
+          
+          this.scene.start(
+            "Preloads")
+        })
+      
+      .on('pointerover', () => {
+          otro.setScale(1.1)
+        })
+      
+      .on('pointerout', () => {
+          otro.setScale(1)
+        })
+         
+       }, 3000)
+    }
 
     update(){
+      if (turno===0) {
+        this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
+      }
+
+      if (turno===1) {
+        this.cameras.main.startFollow(this.player2, true, 0.08, 0.08);
+
+      }
+
 
   }
 
