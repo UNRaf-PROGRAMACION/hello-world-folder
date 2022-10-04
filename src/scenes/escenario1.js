@@ -123,7 +123,7 @@ export class Escenario1 extends Phaser.Scene {
   
       texto = this.add.text(10 - 5, 250 - 125, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
       
-      //texto.setScrollFactor(0);
+      texto.setScrollFactor(0);
       //texto.scrollFactorX= 0
       //texto.scrollFactorY= 1
 

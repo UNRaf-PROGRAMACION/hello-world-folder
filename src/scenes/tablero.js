@@ -1,14 +1,11 @@
-let contar;
 let number;
 let valor;
 let distancia;
 let distancia2;
 let boton;
-let audio2;
 let final;
-let sonido;
-let musica;
 let turno;
+let audio2;
 
 export class Tablero extends Phaser.Scene {
     constructor() {
@@ -25,7 +22,7 @@ export class Tablero extends Phaser.Scene {
       distancia = data.distancia;
       distancia2 = data.distancia2;
       turno = data.turno;
-      contar = data.contar;
+      this.contar = data.contar;
       audio2 = data.audio2;
      
   
@@ -65,45 +62,43 @@ export class Tablero extends Phaser.Scene {
       this.cameras.main.setZoom(2);
 
       this.cameras.main.setBounds(0, 0, 1952, 1080); 
-      
-      musica = this.add.image(distancia - 10, this.player.y - 250,"music2").setInteractive()
+
+
+      let iconoSonido= "music2"
+      if (this.contar === 1) {
+        iconoSonido= "mute2"
+        
+      }
+
+      let musica = this.add.image(distancia - 10, this.player.y - 250,iconoSonido).setInteractive()
       
       .on('pointerdown', () => {
 
-        if(contar===0){
-          contar = 1
-      
-          sonido = this.add.image(distancia - 10, this.player.y - 250,"mute2")
+        if(this.contar === 0){
+
+          this.contar = 1
           audio2.pause()
+
         }else{
-          if (contar === 1){
-            contar = 0
-            sonido.destroy()
-            
+          if (this.contar === 1){
+
+            this.contar = 0
             audio2.resume()
           }
         }
-        
       })
 
       .on('pointerover', () => {
-          musica.setScale(1.1)
-          sonido.setScale(1.1)
-
-        
+        musica.setScale(1.1)
       })
 
       .on('pointerout', () => {
-      
-          musica.setScale(1)
-          sonido.setScale(1)
-
+        musica.setScale(1)
       })
 
       this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
       this.physics.add.overlap(this.player2, final, this.hitFinal2, null, this);
 
-      
 
       boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 150 ,"dado").setInteractive().setOrigin(0.5)
       
@@ -124,7 +119,7 @@ export class Tablero extends Phaser.Scene {
           }, 3000)
 
         setTimeout(() => {
-          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:contar, turno:1, valor:valor   }
+          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:this.contar, turno:1, valor:valor   }
          )}, 5000)
 
          
@@ -141,7 +136,7 @@ export class Tablero extends Phaser.Scene {
           }, 3000)
 
         setTimeout(() => {
-          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:contar, turno:0, valor:valor  }
+          this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:this.contar, turno:0, valor:valor  }
          )}, 5000)
 
          
