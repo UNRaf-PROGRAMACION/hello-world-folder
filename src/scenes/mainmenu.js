@@ -1,7 +1,3 @@
-let contar;
-let sonido;
-let audio;
-
 export class MainMenu extends Phaser.Scene {
   constructor() {
 
@@ -9,17 +5,14 @@ export class MainMenu extends Phaser.Scene {
   }
   init(data) {
       
-    audio = data.audio;
-    contar= data.contar;
+    this.audio = data.audio;
+    this.contar= data.contar;
+    console.log(data)
 
   }
 
   create() {
  
- 
-  contar=0;
-
-
   let Jugar;
   
   this.add.image(this.cameras.main.centerX,this.cameras.main.centerY,"cueva");
@@ -29,8 +22,8 @@ export class MainMenu extends Phaser.Scene {
   Jugar = this.add.image(this.cameras.main.centerX/1.04,this.cameras.main.centerY/0.644,"jugar").setInteractive()
   
   .on('pointerdown', () => {
-      audio.stop();
-      this.scene.start("Instrucciones")
+      this.audio.stop();
+      this.scene.start("Instrucciones",{contar:this.contar})
     })
 
   .on('pointerover', () => {
@@ -47,7 +40,7 @@ export class MainMenu extends Phaser.Scene {
   
     .on('pointerdown', () => {
         
-        this.scene.start("Creditos", {audio:audio, contar:contar,})
+        this.scene.start("Creditos", {audio:this.audio, contar:this.contar})
       })
   
     .on('pointerover', () => {
@@ -58,34 +51,37 @@ export class MainMenu extends Phaser.Scene {
         creditos.setScale(1)
       })
 
-      let musica;
-      musica = this.add.image(1830,80,"music").setInteractive()
+      let iconoSonido= "music"
+      if (this.contar === 1) {
+        iconoSonido= "mute"
+      }
+
+      let musica = this.add.image(1830,80,iconoSonido).setInteractive()
 
       .on('pointerdown', () => {
         
-        if(contar===0){
-          contar = 1
-          sonido = this.add.image(1830,80,"mute")
-          audio.pause()
+        if(this.contar===0){
+          iconoSonido= "mute"
+          this.contar = 1
+          this.audio.pause()
         }else{
-          if (contar === 1){
-            contar = 0
-            sonido.destroy()
-            audio.resume()
+          if (this.contar === 1){
+            iconoSonido= "music"
+            this.contar = 0
+            this.audio.resume()
           }
         }
         
-
       })
   
       .on('pointerover', () => {
         musica.setScale(1.1)
-        sonido.setScale(1.1)
+        //sonido.setScale(1.1)
       })
   
       .on('pointerout', () => {
         musica.setScale(1)
-        sonido.setScale(1)
+        //sonido.setScale(1)
       })
       
   }

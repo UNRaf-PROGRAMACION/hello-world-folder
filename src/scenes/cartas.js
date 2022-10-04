@@ -1,9 +1,5 @@
-let card;
-let card2;
 let distancia;
 let distancia2
-let salvado;
-let contar;
 let audio2;
 let turno;
 let valor; 
@@ -18,7 +14,7 @@ export class Cartas extends Phaser.Scene {
       
       distancia= data.distancia;
       distancia2= data.distancia2;
-      contar=data.contar;
+      this.contar=data.contar;
       audio2=data.audio2;
       turno=data.turno;
       valor=data.valor;
@@ -29,10 +25,10 @@ export class Cartas extends Phaser.Scene {
       this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cueva2");
 
     
-      salvado= Phaser.Math.Between(1,2);
+      let salvado= Phaser.Math.Between(1,2);
       console.log(salvado);
       
-      card = this.add.image(this.cameras.main.centerX/1.1, this.cameras.main.centerY,"carta").setInteractive()
+      let card = this.add.image(this.cameras.main.centerX/1.1, this.cameras.main.centerY,"carta").setInteractive()
 
       
 
@@ -44,7 +40,7 @@ export class Cartas extends Phaser.Scene {
           
           setTimeout(() => {
             audio2.stop();
-            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:contar, valor:valor  }
+            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar, valor:valor  }
      
         )}, 3000); 
           
@@ -54,7 +50,7 @@ export class Cartas extends Phaser.Scene {
             card2.destroy();
             this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartabuena");
             setTimeout(() => {
-              this.scene.start("Tablero", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:contar  }
+              this.scene.start("Tablero", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar  }
           )}, 3000); 
         }
         
@@ -69,7 +65,7 @@ export class Cartas extends Phaser.Scene {
 
     })
    
-    card2 = this.add.image(this.cameras.main.centerX/0.95, this.cameras.main.centerY,"carta").setInteractive()
+    let card2 = this.add.image(this.cameras.main.centerX/0.95, this.cameras.main.centerY,"carta").setInteractive()
 
       .on('pointerdown', () => {
         
@@ -80,7 +76,7 @@ export class Cartas extends Phaser.Scene {
           
           setTimeout(() => {
             audio2.stop()
-            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:contar, valor:valor  }
+            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar, valor:valor  }
      
         )}, 3000); 
         }else{
@@ -90,7 +86,7 @@ export class Cartas extends Phaser.Scene {
             card.destroy();
             this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartabuena");
             setTimeout(() => {
-              this.scene.start("Tablero", { distancia : distancia,distancia2: distancia2,turno : turno, audio2:audio2, contar:contar  }
+              this.scene.start("Tablero", { distancia : distancia,distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar  }
        
           )}, 3000); 
           }

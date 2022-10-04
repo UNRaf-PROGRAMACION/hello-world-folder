@@ -1,16 +1,20 @@
-let audio2;
-let contar;
-let sonido;
 export class Instrucciones extends Phaser.Scene {
   constructor() {
 
     super("Instrucciones");
   }
 
+  init(data) {
+      
+    this.contar= data.contar;
+    console.log(data)
+
+  }
+
   create() {
-    audio2 = this.sound.add('theme2', {loop: true});
+    let audio2 = this.sound.add('theme2', {loop: true});
     audio2.play();
-    contar=0;
+    
     
   this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, "cueva2");
   this.add.image(this.cameras.main.centerX, this.cameras.main.centerY/1.1, "dale");
@@ -19,7 +23,7 @@ export class Instrucciones extends Phaser.Scene {
   .on('pointerdown', () => {
   
     this.scene.start(
-      "Tablero",{distancia : 75,distancia2:75, turno:0, audio2:audio2, contar:contar}
+      "Tablero",{distancia : 75,distancia2:75, turno:0, audio2:audio2, contar:this.contar}
   );
   })
 
@@ -31,21 +35,25 @@ export class Instrucciones extends Phaser.Scene {
     intro.setScale(1)
   })
 
-  let musica;
-  musica = this.add.image(1830,80,"music").setInteractive()
+  let iconoSonido= "music"
+    if (this.contar === 1) {
+      iconoSonido= "mute"
+      audio2.stop();
+    }
+
+  let musica = this.add.image(1830,80,iconoSonido).setInteractive()
 
   .on('pointerdown', () => {
 
-    if(contar===0){
-      contar = 1
-  
-      sonido = this.add.image(1830,80,"mute")
+    if(this.contar===0){
+      iconoSonido= "mute"
+      this.contar = 1
       audio2.pause()
+
     }else{
-      if (contar === 1){
-        contar = 0
-        sonido.destroy()
-        
+      if (this.contar === 1){
+        iconoSonido= "music"
+        this.contar = 0
         audio2.resume()
       }
     }
@@ -54,16 +62,11 @@ export class Instrucciones extends Phaser.Scene {
 
   .on('pointerover', () => {
       musica.setScale(1.1)
-      sonido.setScale(1.1)
-
-    
   })
 
   .on('pointerout', () => {
   
       musica.setScale(1)
-      sonido.setScale(1)
-
   })
 
   }
