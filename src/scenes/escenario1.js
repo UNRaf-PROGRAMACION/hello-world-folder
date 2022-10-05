@@ -14,7 +14,6 @@ let turno;
 let valor;
 let audio3;
 let audio2;
-let contar;
 var texto;
 
 export class Escenario1 extends Phaser.Scene {
@@ -34,7 +33,7 @@ export class Escenario1 extends Phaser.Scene {
       distancia = data.distancia;
       distancia2 = data.distancia2;
       turno = data.turno;
-      contar=data.contar;
+      this.contar=data.contar;
       audio2=data.audio2;
       valor=data.valor;
   
@@ -121,9 +120,9 @@ export class Escenario1 extends Phaser.Scene {
       this.physics.add.overlap(player, snakes, this.hitSnake, null, this);
       this.physics.add.overlap(player, final, this.hitFinal, null, this);
   
-      texto = this.add.text(10 - 5, 250 - 125, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
+      //texto = this.add.text(10 - 5, 250 - 125, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
       
-      texto.setScrollFactor(0);
+      //texto.setScrollFactor(0);
       //texto.scrollFactorX= 0
       //texto.scrollFactorY= 1
 
@@ -139,7 +138,6 @@ export class Escenario1 extends Phaser.Scene {
     hitEnemy(player,enemy) {
       enemy.destroy();
       count = count + 1;
-      //let texto = this.add.text(player.x, player.y - 150, "Vidas: " + (number - count), { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
       this.physics.pause();
   
       player.setTint(0xff0000);
@@ -148,7 +146,6 @@ export class Escenario1 extends Phaser.Scene {
       
 
       setTimeout(() => {
-        //texto.destroy();
         
         this.physics.resume();
   
@@ -156,8 +153,10 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
         
-        number = 3 - count;
-        texto.setText(`Vidas: ${number}`);
+        //number = 3 - count;
+        //texto.setText(`Vidas: ${number}`);
+        events.emit('vida-changed')
+
       }, 900); 
     }
 
@@ -165,7 +164,6 @@ export class Escenario1 extends Phaser.Scene {
       rook.destroy();
       count = count + 1;
       
-      //let texto = this.add.text(player.x, player.y - 150, "Vidas: "+ (number - count), { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
       this.physics.pause();
   
       player.setTint(0xff0000);
@@ -174,7 +172,6 @@ export class Escenario1 extends Phaser.Scene {
       
 
       setTimeout(() => {
-        //texto.destroy();
         
         this.physics.resume();
   
@@ -182,8 +179,10 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
 
-        number = 3 - count;
-        texto.setText(`Vidas: ${number}`);
+        //number = 3 - count;
+        //texto.setText(`Vidas: ${number}`);
+        events.emit('vida-changed')
+
       }, 900); 
     }
 
@@ -191,7 +190,6 @@ export class Escenario1 extends Phaser.Scene {
       snake.destroy();
       count = count + 1;
       
-      //let texto = this.add.text(player.x, player.y - 150, "Vidas: "+ (number - count), { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
       this.physics.pause();
   
       player.setTint(0xff0000);
@@ -200,21 +198,23 @@ export class Escenario1 extends Phaser.Scene {
       
 
       setTimeout(() => {
-        //texto.destroy();
         this.physics.resume();
   
         player.clearTint();
         
         player.anims.play("run");
         
-        number = 3 - count;
-        texto.setText(`Vidas: ${number}`);
+        //number = 3 - count;
+        //texto.setText(`Vidas: ${number}`);
+        events.emit('vida-changed')
 
       }, 900); 
     }
 
     hitFinal(player,final) {
-      texto.destroy();
+      //texto.destroy();
+      events.emit('vida-finish')
+
       this.physics.pause();
       player.anims.play("jump");
       let victory=this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "victoria");
@@ -223,7 +223,7 @@ export class Escenario1 extends Phaser.Scene {
       .on('pointerdown', () => {
         audio3.stop()
         audio2.play()
-        this.scene.start("Tablero", { distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:contar }
+        this.scene.start("Tablero", { distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:this.contar }
       )
       })
       .on('pointerover', () => {
@@ -280,7 +280,7 @@ export class Escenario1 extends Phaser.Scene {
             } 
           }
       
-          this.scene.start("Tablero", {distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:contar})
+          this.scene.start("Tablero", {distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:this.contar})
         })
         .on('pointerover', () => {
           boton.setScale(1.1)
