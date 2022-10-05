@@ -49,7 +49,7 @@ export class Tablero extends Phaser.Scene {
       const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "final");
       final = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "banderaTablero");
 
-      this.player2 = this.physics.add.sprite(distancia2 - 5 , 862.83, "prota2").setCollideWorldBounds(true);
+      this.player2 = this.physics.add.sprite(distancia2 - 10 , 862.83, "prota2").setCollideWorldBounds(true);
       this.player = this.physics.add.sprite(distancia, 862.83, "prota").setCollideWorldBounds(true);
       
   
@@ -70,7 +70,7 @@ export class Tablero extends Phaser.Scene {
         
       }
 
-      let musica = this.add.image(distancia - 10, this.player.y - 250,iconoSonido).setInteractive()
+      let musica = this.add.image(1395, 310 ,iconoSonido).setInteractive()
       
       .on('pointerdown', () => {
 
@@ -96,11 +96,13 @@ export class Tablero extends Phaser.Scene {
         musica.setScale(1)
       })
 
+      musica.setScrollFactor(0);
+
       this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
       this.physics.add.overlap(this.player2, final, this.hitFinal2, null, this);
 
 
-      boton = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 150 ,"dado").setInteractive().setOrigin(0.5)
+      boton = this.add.image(535, 320  ,"dado").setInteractive()
       
       .on('pointerdown', () => {
         
@@ -110,7 +112,7 @@ export class Tablero extends Phaser.Scene {
        
         if (turno === 0) {
           
-          number = this.add.text(distancia - 10, this.player.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
+          number = this.add.text(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y-100, valor, { stroke: 'black', strokeThickness: 5, fontSize: '75px Arial', fill: 'white' })
         
         setTimeout(() => {
           number.destroy()
@@ -127,7 +129,7 @@ export class Tablero extends Phaser.Scene {
         
         if (turno === 1) {
           
-          number = this.add.text(distancia2 - 10, this.player2.y - 170, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
+          number = this.add.text(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
         
         setTimeout(() => {
           number.destroy()
@@ -152,9 +154,8 @@ export class Tablero extends Phaser.Scene {
           boton.setScale(1)
         })
 
-        //boton.scrollFactorX= 1
-        //boton.scrollFactorY= 1
-
+        
+        boton.setScrollFactor(0);
 
  
     }

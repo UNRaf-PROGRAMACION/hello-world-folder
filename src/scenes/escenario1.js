@@ -16,6 +16,7 @@ let audio3;
 let audio2;
 var texto;
 
+
 export class Escenario1 extends Phaser.Scene {
     constructor() {
 
@@ -120,9 +121,9 @@ export class Escenario1 extends Phaser.Scene {
       this.physics.add.overlap(player, snakes, this.hitSnake, null, this);
       this.physics.add.overlap(player, final, this.hitFinal, null, this);
   
-      //texto = this.add.text(10 - 5, 250 - 125, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
+      texto = this.add.text(330 ,200, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
       
-      //texto.setScrollFactor(0);
+      texto.setScrollFactor(0);
       //texto.scrollFactorX= 0
       //texto.scrollFactorY= 1
 
@@ -153,9 +154,9 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
         
-        //number = 3 - count;
-        //texto.setText(`Vidas: ${number}`);
-        events.emit('vida-changed')
+        number = 3 - count;
+        texto.setText(`Vidas: ${number}`);
+        //events.emit('vida-changed')
 
       }, 900); 
     }
@@ -179,9 +180,9 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
 
-        //number = 3 - count;
-        //texto.setText(`Vidas: ${number}`);
-        events.emit('vida-changed')
+        number = 3 - count;
+        texto.setText(`Vidas: ${number}`);
+        //events.emit('vida-changed')
 
       }, 900); 
     }
@@ -204,21 +205,21 @@ export class Escenario1 extends Phaser.Scene {
         
         player.anims.play("run");
         
-        //number = 3 - count;
-        //texto.setText(`Vidas: ${number}`);
-        events.emit('vida-changed')
+        number = 3 - count;
+        texto.setText(`Vidas: ${number}`);
+        //events.emit('vida-changed')
 
       }, 900); 
     }
 
     hitFinal(player,final) {
-      //texto.destroy();
-      events.emit('vida-finish')
+      texto.destroy();
+      //events.emit('vida-finish')
 
       this.physics.pause();
       player.anims.play("jump");
       let victory=this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "victoria");
-      let boton=this.add.image(victory.x/1.007,victory.y/0.83, "botone").setInteractive()
+      let boton=this.add.image(this.cameras.main.midPoint.x - 20,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
 
       .on('pointerdown', () => {
         audio3.stop()
@@ -263,10 +264,11 @@ export class Escenario1 extends Phaser.Scene {
         gameOver= true; 
         
         this.physics.pause();
+        player.setTint(0xff0000);
         player.anims.play("jump");
 
-        let derrota=this.add.image(player.x ,player.y/1.5, "derrota")
-        let boton =this.add.image(derrota.x/1.008,derrota.y/0.82, "botone").setInteractive()
+        let derrota=this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota")
+        let boton =this.add.image(this.cameras.main.midPoint.x - 20,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
         .on('pointerdown', () => {
 
           audio3.stop()
@@ -290,7 +292,7 @@ export class Escenario1 extends Phaser.Scene {
           boton.setScale(1)
         })
 
-      }, 1000); 
+      }, 500); 
       
     }
     

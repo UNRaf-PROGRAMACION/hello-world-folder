@@ -1,7 +1,7 @@
-import Phaser from 'phaser'
-import { sharedInstance as events } from './EventCenter'
+//import Phaser from 'phaser'
+//import { sharedInstance as events } from './EventCenter'
 
-export default class UI extends Phaser.Scene
+export  class UI extends Phaser.Scene
 {
 
 	constructor()
@@ -21,7 +21,7 @@ export default class UI extends Phaser.Scene
         texto = this.add.text(10 - 5, 250 - 125, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
     
     
-    
+		
         events.on('vida-changed', this.handleVidaChanged, this);
         events.on('vida-finish', this.handleVidaFinish, this);
 
