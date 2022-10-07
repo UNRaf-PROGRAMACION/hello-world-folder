@@ -45,20 +45,18 @@ export class Creditos extends Phaser.Scene {
       .on('pointerdown', () => {
 
         if(this.contar===0){
-          //iconoSonido= "mute"
+          iconoSonido= "mute"
           this.contar = 1
           this.audio.pause()
-          this.mute = this.add.image(1830,80,"mute").setInteractive()
-          musica.setAlpha(0.5)
+          musica.setTexture("mute")
           
           
         }else{
           if (this.contar === 1){
-            //iconoSonido= "music"
+            iconoSonido= "music"
             this.contar = 0
             this.audio.resume()
-            this.mute.destroy()
-            musica.setAlpha(1)
+            musica.setTexture("music")
            
           }
         }
