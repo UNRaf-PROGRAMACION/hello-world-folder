@@ -36,9 +36,11 @@ export class Instrucciones extends Phaser.Scene {
   })
 
   let iconoSonido= "music"
+    
     if (this.contar === 1) {
       iconoSonido= "mute"
-      audio2.stop();
+      audio2.play();
+      audio2.pause();
     }
 
   let musica = this.add.image(1830,80,iconoSonido).setInteractive()

@@ -65,9 +65,11 @@ export class Tablero extends Phaser.Scene {
 
 
       let iconoSonido= "music2"
+      
       if (this.contar === 1) {
         iconoSonido= "mute2"
-        
+        audio2.play();
+        audio2.pause();
       }
 
       let musica = this.add.image(1395, 310 ,iconoSonido).setInteractive()
@@ -130,7 +132,7 @@ export class Tablero extends Phaser.Scene {
         
         if (turno === 1) {
           
-          number = this.add.text(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, valor, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' })
+          number = this.add.text(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y-100, valor, { stroke: 'black', strokeThickness: 5, fontSize: '75px Arial', fill: 'white' })
         
         setTimeout(() => {
           number.destroy()

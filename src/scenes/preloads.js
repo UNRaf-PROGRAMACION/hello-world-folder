@@ -25,9 +25,9 @@ export class Preloads extends Phaser.Scene {
     this.load.image("cartabuena", "public/assets/images/carta buena.png");
     this.load.image("cartacorrer", "public/assets/images/carta correr.png");
     this.load.image("completo", "public/assets/images/JUEGO COMPLETADO.png");
-    this.load.image("victoria", "public/assets/images/vic.png");
-    this.load.image("derrota", "public/assets/images/der.png");
-    this.load.image("botone", "public/assets/images/Boton.png");
+    this.load.image("victoria", "public/assets/images/pop ups victoria derrota/Victoria Jungla.png");
+    this.load.image("derrota", "public/assets/images/pop ups victoria derrota/Derrota Jungla.png");
+    this.load.image("botone", "public/assets/images/pop ups victoria derrota/boton2.png");
     this.load.image("banderaTablero", "public/assets/images/Victoria tablero.png");
     this.load.image("banderaEsc", "public/assets/images/Victoria jungla.png");
     this.load.image("roca", "public/assets/images/PIEDRAS2.png");

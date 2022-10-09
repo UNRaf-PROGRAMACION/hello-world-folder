@@ -218,7 +218,7 @@ export class Escenario1 extends Phaser.Scene {
 
       this.physics.pause();
       player.anims.play("jump");
-      let victory=this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "victoria");
+      let victory=this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y, "victoria");
       let boton=this.add.image(this.cameras.main.midPoint.x - 20,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
 
       .on('pointerdown', () => {
@@ -263,12 +263,13 @@ export class Escenario1 extends Phaser.Scene {
       setTimeout(() => {
         gameOver= true; 
         
+        this.cameras.main.stopFollow();
         this.physics.pause();
         player.setTint(0xff0000);
         player.anims.play("jump");
 
-        let derrota=this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota")
-        let boton =this.add.image(this.cameras.main.midPoint.x - 20,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
+        let derrota =this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota")
+        let boton =this.add.image(this.cameras.main.midPoint.x -6,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
         .on('pointerdown', () => {
 
           audio3.stop()
@@ -292,7 +293,7 @@ export class Escenario1 extends Phaser.Scene {
           boton.setScale(1)
         })
 
-      }, 500); 
+      }, 900); 
       
     }
     
