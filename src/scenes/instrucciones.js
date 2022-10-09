@@ -49,12 +49,14 @@ export class Instrucciones extends Phaser.Scene {
       iconoSonido= "mute"
       this.contar = 1
       audio2.pause()
+      musica.setTexture("mute")
 
     }else{
       if (this.contar === 1){
         iconoSonido= "music"
         this.contar = 0
         audio2.resume()
+        musica.setTexture("music")
       }
     }
     

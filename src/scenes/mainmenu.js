@@ -64,11 +64,13 @@ export class MainMenu extends Phaser.Scene {
           iconoSonido= "mute"
           this.contar = 1
           this.audio.pause()
+          musica.setTexture("mute")
         }else{
           if (this.contar === 1){
             iconoSonido= "music"
             this.contar = 0
             this.audio.resume()
+            musica.setTexture("music")
           }
         }
         

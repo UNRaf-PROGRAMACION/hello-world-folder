@@ -75,15 +75,16 @@ export class Tablero extends Phaser.Scene {
       .on('pointerdown', () => {
 
         if(this.contar === 0){
-
+          iconoSonido= "mute2"
           this.contar = 1
           audio2.pause()
-
+          musica.setTexture("mute2")
         }else{
           if (this.contar === 1){
-
+            iconoSonido= "music2"
             this.contar = 0
             audio2.resume()
+            musica.setTexture("music2")
           }
         }
       })
