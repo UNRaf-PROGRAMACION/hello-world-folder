@@ -34,6 +34,7 @@ export class Escenario1 extends Phaser.Scene {
       distancia = data.distancia;
       distancia2 = data.distancia2;
       turno = data.turno;
+      this.movimiento = data.movimiento;
       this.contar=data.contar;
       audio2=data.audio2;
       valor=data.valor;
@@ -124,8 +125,7 @@ export class Escenario1 extends Phaser.Scene {
       texto = this.add.text(330 ,200, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
       
       texto.setScrollFactor(0);
-      //texto.scrollFactorX= 0
-      //texto.scrollFactorY= 1
+     
 
       gameOver = false;
 
@@ -156,7 +156,7 @@ export class Escenario1 extends Phaser.Scene {
         
         number = 3 - count;
         texto.setText(`Vidas: ${number}`);
-        //events.emit('vida-changed')
+        
 
       }, 900); 
     }
@@ -182,7 +182,7 @@ export class Escenario1 extends Phaser.Scene {
 
         number = 3 - count;
         texto.setText(`Vidas: ${number}`);
-        //events.emit('vida-changed')
+       
 
       }, 900); 
     }
@@ -207,14 +207,14 @@ export class Escenario1 extends Phaser.Scene {
         
         number = 3 - count;
         texto.setText(`Vidas: ${number}`);
-        //events.emit('vida-changed')
+        
 
       }, 900); 
     }
 
     hitFinal(player,final) {
       texto.destroy();
-      //events.emit('vida-finish')
+      
 
       this.physics.pause();
       player.anims.play("jump");
@@ -224,7 +224,7 @@ export class Escenario1 extends Phaser.Scene {
       .on('pointerdown', () => {
         audio3.stop()
         audio2.play()
-        this.scene.start("Tablero", { distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:this.contar }
+        this.scene.start("Tablero", { distancia : distancia, distancia2:distancia2, turno:turno, movimiento : 1, audio2:audio2, contar:this.contar }
       )
       })
       .on('pointerover', () => {
@@ -276,14 +276,14 @@ export class Escenario1 extends Phaser.Scene {
           audio2.play()
           
           if (turno === 1) {
-            distancia = distancia - (128 * valor)
+            turno= 0
           }else{
             if (turno === 0){
-              distancia2 = distancia2 - (128 * valor)
+              turno = 1
             } 
           }
       
-          this.scene.start("Tablero", {distancia : distancia, distancia2:distancia2, turno:turno, audio2:audio2, contar:this.contar})
+          this.scene.start("Tablero", {distancia : distancia, distancia2:distancia2, turno:turno, movimiento: 0, audio2:audio2, contar:this.contar})
         })
         .on('pointerover', () => {
           boton.setScale(1.1)

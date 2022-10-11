@@ -18,6 +18,7 @@ export class Cartas extends Phaser.Scene {
       audio2=data.audio2;
       turno=data.turno;
       valor=data.valor;
+      this.movimiento = data.movimiento;
     }
     create() {
 
@@ -40,7 +41,7 @@ export class Cartas extends Phaser.Scene {
           
           setTimeout(() => {
             audio2.stop();
-            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar, valor:valor  }
+            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2,turno : turno, movimiento : this.movimiento ,audio2:audio2, contar:this.contar, valor:valor  }
      
         )}, 3000); 
           
@@ -50,7 +51,7 @@ export class Cartas extends Phaser.Scene {
             card2.destroy();
             this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartabuena");
             setTimeout(() => {
-              this.scene.start("Tablero", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar  }
+              this.scene.start("Tablero", { distancia : distancia, distancia2: distancia2,turno : turno, movimiento : this.movimiento ,audio2:audio2, contar:this.contar  }
           )}, 3000); 
         }
         
@@ -76,7 +77,7 @@ export class Cartas extends Phaser.Scene {
           
           setTimeout(() => {
             audio2.stop()
-            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar, valor:valor  }
+            this.scene.start("Escenario1", { distancia : distancia, distancia2: distancia2, turno : turno, movimiento : this.movimiento, audio2:audio2, contar:this.contar, valor:valor  }
      
         )}, 3000); 
         }else{
@@ -86,7 +87,7 @@ export class Cartas extends Phaser.Scene {
             card.destroy();
             this.add.image(this.cameras.main.centerX, this.cameras.main.centerY,"cartabuena");
             setTimeout(() => {
-              this.scene.start("Tablero", { distancia : distancia,distancia2: distancia2,turno : turno, audio2:audio2, contar:this.contar  }
+              this.scene.start("Tablero", { distancia : distancia,distancia2: distancia2,turno : turno, movimiento : this.movimiento, audio2:audio2, contar:this.contar  }
        
           )}, 3000); 
           }

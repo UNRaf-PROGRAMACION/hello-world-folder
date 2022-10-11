@@ -7,7 +7,7 @@ export class MainMenu extends Phaser.Scene {
       
     this.audio = data.audio;
     this.contar= data.contar;
-    console.log(data)
+    
 
   }
 
