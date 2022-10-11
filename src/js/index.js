@@ -1,11 +1,12 @@
 import { Preloads } from "../scenes/preloads.js";
 import { MainMenu } from "../scenes/mainmenu.js";
 import { Creditos } from "../scenes/creditos.js";
-import { Configuraciones } from "../scenes/configuraciones.js";
 import { Instrucciones } from "../scenes/instrucciones.js";
 import { Tablero } from "../scenes/tablero.js";
 import { Cartas } from "../scenes/cartas.js";
 import { Escenario1 } from "../scenes/escenario1.js";
+import { Escenario2 } from "../scenes/escenario2.js";
+
 
 
 const config = {
@@ -33,7 +34,7 @@ const config = {
   },
   // Listado de todas las escenas del juego, en orden
   // La primera escena es con la cual empieza el juego
-  scene: [Preloads, MainMenu, Configuraciones, Instrucciones, Tablero, Cartas, Escenario1, Creditos],
+  scene: [Preloads, MainMenu, Creditos, Instrucciones, Tablero, Cartas, Escenario1, Escenario2 ],
 };
 
 const game = new Phaser.Game(config);
