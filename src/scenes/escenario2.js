@@ -1,7 +1,7 @@
 let player;
-let enemys;
-let rooks;
-let snakes;
+let tachos;
+//let rooks;
+let gatos;
 let final;
 let cursors;
 let gameOver;
@@ -11,22 +11,21 @@ let isJumping;
 let distancia;
 let distancia2;
 let turno;
-let valor;
 let audio3;
 let audio2;
 var texto;
 
 
-export class Escenario1 extends Phaser.Scene {
+export class Escenario2 extends Phaser.Scene {
     constructor() {
 
-      super("Escenario1");
+      super("Escenario2");
     }
 
     preload() {
-      this.load.tilemapTiledJSON("map1", "public/assets/tilemaps/esc1.json");
-      this.load.image("tilesBelow1", "public/assets/images/jungla-atlas.png");
-      this.load.image("tilesPlatform1", "public/assets/images/plataforma.png");
+      this.load.tilemapTiledJSON("map1", "public/assets/tilemaps/esc2.json");
+      this.load.image("tilesBelow1", "public/assets/images/fondonoche - atlas.png");
+      this.load.image("tilesPlatform1", "public/assets/images/plataforma noche - atlas.png");
     
     }
     init(data) {
@@ -38,7 +37,6 @@ export class Escenario1 extends Phaser.Scene {
       this.contar=data.contar;
       audio2=data.audio2;
       
-  
     }
     create() {
 
@@ -49,10 +47,10 @@ export class Escenario1 extends Phaser.Scene {
   
       const map1 = this.make.tilemap({ key: "map1" });
 
-      const tilesetBelow1 = map1.addTilesetImage("jungla-atlas", "tilesBelow1");
+      const tilesetBelow1 = map1.addTilesetImage("fondonoche - atlas", "tilesBelow1");
   
       const tilesetPlatform1 = map1.addTilesetImage(
-        "plataforma",
+        "plataforma noche - atlas",
         "tilesPlatform1"
       );
   
@@ -78,30 +76,24 @@ export class Escenario1 extends Phaser.Scene {
       cursors = this.input.keyboard.createCursorKeys();
     
 
-      enemys = this.physics.add.group();
-      rooks = this.physics.add.group();
-      snakes = this.physics.add.group();
+      tachos = this.physics.add.group();
+      //rooks = this.physics.add.group();
+      gatos = this.physics.add.group();
       
 
       objectsLayer.objects.forEach((objData) => {
 
       const { x = 0, y = 0, name, type } = objData;
       switch (name) {
-        case "enemy": {
+        case "tacho": {
 
-          const enemy = enemys.create(x, y, "roca");
+          const tacho = tachos.create(x, y, "tacho");
           
           break;
         }
-        case "snake": {
+        case "gato": {
 
-          const snake = snakes.create(x, y, "snake");
-          
-          break;
-        }
-        case "rook": {
-
-          const rook = rooks.create(x, y, "roca2");
+          const gato = gatos.create(x, y, "gato");
           
           break;
         }
@@ -112,14 +104,14 @@ export class Escenario1 extends Phaser.Scene {
       number= 3;
        
       this.physics.add.collider(player, worldLayer);
-      this.physics.add.collider(enemys, worldLayer);
-      this.physics.add.collider(rooks, worldLayer);
-      this.physics.add.collider(snakes, worldLayer);
+      this.physics.add.collider(tachos, worldLayer);
+      //this.physics.add.collider(rooks, worldLayer);
+      this.physics.add.collider(gatos, worldLayer);
       this.physics.add.collider(final, worldLayer);
   
-      this.physics.add.overlap(player, enemys, this.hitEnemy, null, this);
-      this.physics.add.overlap(player, rooks, this.hitRook, null, this);
-      this.physics.add.overlap(player, snakes, this.hitSnake, null, this);
+      this.physics.add.overlap(player, tachos, this.hitTacho, null, this);
+      //this.physics.add.overlap(player, rooks, this.hitRook, null, this);
+      this.physics.add.overlap(player, gatos, this.hitGato, null, this);
       this.physics.add.overlap(player, final, this.hitFinal, null, this);
   
       texto = this.add.text(330 ,200, `Vidas: ${number}`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
@@ -136,8 +128,8 @@ export class Escenario1 extends Phaser.Scene {
       this.cameras.main.setBounds(0, 0, 3200, 960);
     }
 
-    hitEnemy(player,enemy) {
-      enemy.destroy();
+    hitTacho(player,tacho) {
+      tacho.destroy();
       count = count + 1;
       this.physics.pause();
   
@@ -160,7 +152,7 @@ export class Escenario1 extends Phaser.Scene {
 
       }, 900); 
     }
-
+/*
     hitRook(player,rook) {
       rook.destroy();
       count = count + 1;
@@ -186,9 +178,9 @@ export class Escenario1 extends Phaser.Scene {
 
       }, 900); 
     }
-
-    hitSnake(player,snake) {
-      snake.destroy();
+*/
+    hitGato(player,gato) {
+      gato.destroy();
       count = count + 1;
       
       this.physics.pause();
@@ -215,10 +207,9 @@ export class Escenario1 extends Phaser.Scene {
     hitFinal(player,final) {
       texto.destroy();
       
-
       this.physics.pause();
       player.anims.play("jump");
-      let victory=this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y, "victoria");
+      let victory=this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y, "victoria2");
       let boton=this.add.image(this.cameras.main.midPoint.x - 20,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
 
       .on('pointerdown', () => {
@@ -258,7 +249,6 @@ export class Escenario1 extends Phaser.Scene {
       }
     }
 
-
     if (count === 3){
     
       setTimeout(() => {
@@ -269,7 +259,7 @@ export class Escenario1 extends Phaser.Scene {
         player.setTint(0xff0000);
         player.anims.play("jump");
 
-        let derrota =this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota")
+        let derrota =this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota2")
         let boton =this.add.image(this.cameras.main.midPoint.x -6,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
         .on('pointerdown', () => {
 
