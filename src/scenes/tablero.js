@@ -122,14 +122,16 @@ export class Tablero extends Phaser.Scene {
           this.player.setX(distancia + 128 * valor)
           this.player.setScale(1)
           turno === 1
-          //this.cameras.main.stopFollow()
+          this.cameras.main.stopFollow()
+          console.log("deje de seguir a 1")
+
+          this.cameras.main.startFollow(this.player2, true, 0.8, 0.8)
+          console.log(this.cameras.main)
+          console.log("comence a seguir a 2")
+          this.player2.setScale(1.1)
           }, 3000)
 
-        setTimeout(() => {
-          //this.cameras.main.setPosition(distancia - 128 * valor,0)
-          this.player2.setScale(1.1)
-          
-          }, 5000)
+        
 
         setTimeout(() => {
           this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:this.contar, turno:1, movimiento: 1, valor:valor   }
@@ -147,11 +149,13 @@ export class Tablero extends Phaser.Scene {
           this.player2.setX(distancia2 + 128 * valor)
           this.player2.setScale(1)
           turno === 0
-          //this.cameras.main.stopFollow()
+          this.cameras.main.stopFollow()
+          console.log("deje de seguir")
           }, 3000)
 
         setTimeout(() => {
-          //this.cameras.main.setPosition(this.player.x ,this.player.y)
+          this.cameras.main.startFollow(this.player, true, 0.8, 0.8)
+          console.log("comence a seguir")
           this.player.setScale(1.1)
           
           }, 5000)
