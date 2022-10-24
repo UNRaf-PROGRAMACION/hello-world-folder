@@ -39,6 +39,7 @@ export class Tablero extends Phaser.Scene {
         "casilas atlas",
         "tilesPlatform"
       );
+    
   
       const belowLayer = map.createLayer("Fondo", tilesetBelow, 0, 0);
       const worldLayer = map.createLayer("Plataformas", tilesetPlatform, 0, 0);
@@ -73,6 +74,7 @@ export class Tablero extends Phaser.Scene {
       this.cameras.main.setZoom(2);
 
       this.cameras.main.setBounds(0, 0, 1952, 1080); 
+
 
 
       let iconoSonido= "music2"
@@ -120,15 +122,18 @@ export class Tablero extends Phaser.Scene {
 
 
       boton = this.add.image(535, 320  ,"dado").setInteractive()
+
       
       .on('pointerdown', () => {
         
         musica.destroy()
         boton.destroy()
         this.updateTexto()
+
+        //texto = this.add.text(x, y, `Turno Jugador 1`, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
        
         if (turno === 0) {
-          
+
           number = this.add.text(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y - 100, valor, { stroke: 'black', strokeThickness: 5, fontSize: '75px Arial', fill: 'white' })
         
         setTimeout(() => {
@@ -142,9 +147,12 @@ export class Tablero extends Phaser.Scene {
           letrero = "Turno Jugador 2"
           cartelTurno.setText(letrero)
           this.cameras.main.startFollow(this.player2)
+
+
           this.player2.setScale(1.1)
-          
-          }, 5000)
+          }, 3000)
+
+        
 
         setTimeout(() => {
           this.scene.start("Cartas", { distancia : this.player.x, distancia2: this.player2.x, audio2:audio2, contar:this.contar, turno:1, movimiento: 1, valor:valor   }
@@ -169,7 +177,6 @@ export class Tablero extends Phaser.Scene {
           cartelTurno.setText(letrero)
           this.cameras.main.startFollow(this.player)
           this.player.setScale(1.1)
-          
           }, 5000)
 
         setTimeout(() => {
@@ -260,6 +267,7 @@ export class Tablero extends Phaser.Scene {
     }
 
     update(){
+
 
   }
 

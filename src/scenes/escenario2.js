@@ -23,9 +23,9 @@ export class Escenario2 extends Phaser.Scene {
     }
 
     preload() {
-      this.load.tilemapTiledJSON("map1", "public/assets/tilemaps/esc2.json");
-      this.load.image("tilesBelow1", "public/assets/images/fondonoche - atlas.png");
-      this.load.image("tilesPlatform1", "public/assets/images/plataforma noche - atlas.png");
+      this.load.tilemapTiledJSON("map2", "public/assets/tilemaps/esc2.json");
+      this.load.image("tilesBelow2", "public/assets/images/fondonoche - atlas.png");
+      this.load.image("tilesPlatform2", "public/assets/images/plataforma noche - atlas.png");
     
     }
     init(data) {
@@ -45,22 +45,22 @@ export class Escenario2 extends Phaser.Scene {
       audio3 = this.sound.add('theme3', {loop: true});
       audio3.play();
   
-      const map1 = this.make.tilemap({ key: "map1" });
+      const map2 = this.make.tilemap({ key: "map2" });
 
-      const tilesetBelow1 = map1.addTilesetImage("fondonoche - atlas", "tilesBelow1");
+      const tilesetBelow2 = map2.addTilesetImage("fondonoche - atlas", "tilesBelow2");
   
-      const tilesetPlatform1 = map1.addTilesetImage(
+      const tilesetPlatform2 = map2.addTilesetImage(
         "plataforma noche - atlas",
-        "tilesPlatform1"
+        "tilesPlatform2"
       );
   
-      const belowLayer = map1.createLayer("Fondo", tilesetBelow1, 0, 0);
-      const worldLayer = map1.createLayer("Plataformas", tilesetPlatform1, 0, 0);
-      const objectsLayer = map1.getObjectLayer("Objetos");
+      const belowLayer = map2.createLayer("Fondo", tilesetBelow2, 0, 0);
+      const worldLayer = map2.createLayer("Plataformas", tilesetPlatform2, 0, 0);
+      const objectsLayer = map2.getObjectLayer("Objetos");
   
       worldLayer.setCollisionByProperty({ collides: true });
   
-      const spawnPoint = map1.findObject("Objetos", (obj) => obj.name === "dude");
+      const spawnPoint = map2.findObject("Objetos", (obj) => obj.name === "dude");
 
       player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude2")
       .setCircle(50, 40, 40);
@@ -70,7 +70,7 @@ export class Escenario2 extends Phaser.Scene {
       
       isJumping = false;
 
-      const spawnPoint2 = map1.findObject("Objetos", (obj) => obj.name === "final");
+      const spawnPoint2 = map2.findObject("Objetos", (obj) => obj.name === "final");
       final = this.physics.add.sprite(spawnPoint2.x, spawnPoint2.y, "banderaEsc");
 
       cursors = this.input.keyboard.createCursorKeys();
