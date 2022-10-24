@@ -43,6 +43,10 @@ export class Preloads extends Phaser.Scene {
       frameWidth: 150,
       frameHeight: 155,
     });
+    this.load.spritesheet("dude2", "public/assets/images/spritesnoche.png", {
+      frameWidth: 112.5,
+      frameHeight: 155,
+    });
 
   
     this.load.audio("theme", "public/assets/sounds/musica.mp3");
@@ -70,5 +74,19 @@ export class Preloads extends Phaser.Scene {
     audio.play();
     this.scene.start("MainMenu", {distancia:75, distancia2:65, turno:0, audio:audio, contar:0}
     );
+
+
+    this.anims.create({
+      key: "run2",
+      frames: this.anims.generateFrameNumbers("dude2", { start: 0, end: 2 }),
+      frameRate: 7,
+      repeat: -1,
+    });
+   
+    this.anims.create({
+      key: "jump2",
+      frames: [{ key: "dude2", frame: 3 }],
+      frameRate: 20,
+    });
   }
 }

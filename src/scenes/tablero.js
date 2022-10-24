@@ -58,9 +58,19 @@ export class Tablero extends Phaser.Scene {
       this.physics.add.collider(this.player, worldLayer);
       this.physics.add.collider(this.player2, worldLayer);
       this.physics.add.collider(final, worldLayer);
+      
+      let letrero
 
-      this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
-
+      if (turno===0) {
+        this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
+        this.player.setScale(1.1);
+        letrero = "Turno Jugador 1"
+      }else{
+        this.cameras.main.startFollow(this.player2, true, 0.08, 0.08);
+        this.player2.setScale(1.1);
+        letrero = "Turno Jugador 2"
+      }
+       
       this.cameras.main.setZoom(2);
 
       this.cameras.main.setBounds(0, 0, 1952, 1080); 
@@ -107,7 +117,12 @@ export class Tablero extends Phaser.Scene {
       this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
       this.physics.add.overlap(this.player2, final, this.hitFinal2, null, this);
 
-      boton = this.add.image(555, 355  ,"dado").setInteractive()
+      let cartelTurno = this.add.text(780, 280, letrero, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
+      cartelTurno.setScrollFactor(0);
+
+
+      boton = this.add.image(535, 320  ,"dado").setInteractive()
+
       
       .on('pointerdown', () => {
         
@@ -126,12 +141,14 @@ export class Tablero extends Phaser.Scene {
           this.player.setX(distancia + 128 * valor)
           this.player.setScale(1)
           turno === 1
-          this.cameras.main.stopFollow()
-          console.log("deje de seguir a 1")
+          }, 3000)
 
-          this.cameras.main.startFollow(this.player2, true, 0.8, 0.8)
-          console.log(this.cameras.main)
-          console.log("comence a seguir a 2")
+        setTimeout(() => {
+          letrero = "Turno Jugador 2"
+          cartelTurno.setText(letrero)
+          this.cameras.main.startFollow(this.player2)
+
+
           this.player2.setScale(1.1)
           }, 3000)
 
@@ -153,13 +170,12 @@ export class Tablero extends Phaser.Scene {
           this.player2.setX(distancia2 + 128 * valor)
           this.player2.setScale(1)
           turno === 0
-          this.cameras.main.stopFollow()
-          console.log("deje de seguir")
           }, 3000)
 
         setTimeout(() => {
-          this.cameras.main.startFollow(this.player, true, 0.8, 0.8)
-          console.log("comence a seguir")
+          letrero = "Turno Jugador 1"
+          cartelTurno.setText(letrero)
+          this.cameras.main.startFollow(this.player)
           this.player.setScale(1.1)
           }, 5000)
 
@@ -251,17 +267,7 @@ export class Tablero extends Phaser.Scene {
     }
 
     update(){
-      if (turno===0) {
-        this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
-        this.player.setScale(1.1);
-    
-      }
-      
-      if (turno===1) {
-        this.cameras.main.startFollow(this.player2, true, 0.08, 0.08);
-        this.player2.setScale(1.1);
-        
-      }
+
 
   }
 

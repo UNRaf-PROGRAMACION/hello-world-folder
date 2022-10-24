@@ -1,4 +1,3 @@
-
 export class Creditos extends Phaser.Scene {
     contar
     constructor() {
