@@ -62,11 +62,11 @@ export class Escenario2 extends Phaser.Scene {
   
       const spawnPoint = map1.findObject("Objetos", (obj) => obj.name === "dude");
 
-      player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude")
+      player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude2")
       .setCircle(50, 40, 40);
     
       //player.setCollideWorldBounds(true);
-      player.anims.play("run");
+      player.anims.play("run2");
       
       isJumping = false;
 
@@ -135,7 +135,7 @@ export class Escenario2 extends Phaser.Scene {
   
       player.setTint(0xff0000);
     
-      player.anims.play("jump");
+      player.anims.play("jump2");
       
 
       setTimeout(() => {
@@ -144,7 +144,7 @@ export class Escenario2 extends Phaser.Scene {
   
         player.clearTint();
         
-        player.anims.play("run");
+        player.anims.play("run2");
         
         number = 3 - count;
         texto.setText(`Vidas: ${number}`);
@@ -187,7 +187,7 @@ export class Escenario2 extends Phaser.Scene {
   
       player.setTint(0xff0000);
     
-      player.anims.play("jump");
+      player.anims.play("jump2");
       
 
       setTimeout(() => {
@@ -195,7 +195,7 @@ export class Escenario2 extends Phaser.Scene {
   
         player.clearTint();
         
-        player.anims.play("run");
+        player.anims.play("run2");
         
         number = 3 - count;
         texto.setText(`Vidas: ${number}`);
@@ -205,12 +205,13 @@ export class Escenario2 extends Phaser.Scene {
     }
 
     hitFinal(player,final) {
+
       texto.destroy();
-      
+      this.cameras.main.stopFollow();
       this.physics.pause();
-      player.anims.play("jump");
-      let victory=this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y, "victoria2");
-      let boton=this.add.image(this.cameras.main.midPoint.x - 20,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
+      player.anims.play("jump2");
+      let victory = this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y, "victoria2");
+      let boton = this.add.image(this.cameras.main.midPoint.x - 13,this.cameras.main.midPoint.y+150, "botone").setInteractive()
 
       .on('pointerdown', () => {
         audio3.stop()
@@ -239,11 +240,11 @@ export class Escenario2 extends Phaser.Scene {
     if (cursors.up.isDown && player.body.blocked.down) {
       player.setVelocityY(-520);
       player.setVelocityX(200);
-      player.anims.play("jump");
+      player.anims.play("jump2");
       isJumping = true;
     } else {
       if (isJumping && player.body.blocked.down) {
-        player.anims.play("run");
+        player.anims.play("run2");
         player.setVelocityX(100);
         isJumping = false;
       }
@@ -257,10 +258,10 @@ export class Escenario2 extends Phaser.Scene {
         this.cameras.main.stopFollow();
         this.physics.pause();
         player.setTint(0xff0000);
-        player.anims.play("jump");
+        player.anims.play("jump2");
 
         let derrota =this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota2")
-        let boton =this.add.image(this.cameras.main.midPoint.x -6,this.cameras.main.midPoint.y + 120, "botone").setInteractive()
+        let boton =this.add.image(this.cameras.main.midPoint.x -13,this.cameras.main.midPoint.y + 130, "botone").setInteractive()
         .on('pointerdown', () => {
 
           audio3.stop()
