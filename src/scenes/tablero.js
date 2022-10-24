@@ -147,10 +147,8 @@ export class Tablero extends Phaser.Scene {
           letrero = "Turno Jugador 2"
           cartelTurno.setText(letrero)
           this.cameras.main.startFollow(this.player2)
-
-
           this.player2.setScale(1.1)
-          }, 3000)
+          }, 5000)
 
         
 
