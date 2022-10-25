@@ -9,7 +9,7 @@ export class Preloads extends Phaser.Scene {
 
     this.load.image("cueva", "public/assets/images/cueva1.png");
     this.load.image("cueva2", "public/assets/images/cueva22.png");
-    this.load.image("inicio", "public/assets/images/Ruinas del tiempo.png");
+    this.load.image("inicio", "public/assets/images/Ruinas_del_tiempo.png");
     this.load.image("jugar", "public/assets/images/jugar.png");
     this.load.image("credito", "public/assets/images/credi.png");
     this.load.image("creditos", "public/assets/images/Creditos.png");
@@ -21,7 +21,11 @@ export class Preloads extends Phaser.Scene {
     this.load.image("dale", "public/assets/images/Intrucciones.png");
     this.load.image("intro", "public/assets/images/saltar intro.png");
     this.load.image("dado", "public/assets/images/dados.png");
+     this.load.image("turnoJugador", "public/assets/images/Turno_jugador.png");
     this.load.image("carta", "public/assets/images/carta.png");
+    this.load.image("elegirCarta", "public/assets/images/Elige_tu_destino.png");
+    this.load.image("cara1", "public/assets/images/cara_de_costado.png");
+    this.load.image("cara2", "public/assets/images/cara_2_de_costado.png");
     this.load.image("cartabuena", "public/assets/images/carta buena.png");
     this.load.image("cartacorrer", "public/assets/images/carta correr.png");
     this.load.image("completo", "public/assets/images/JUEGO COMPLETADO.png");
@@ -30,6 +34,7 @@ export class Preloads extends Phaser.Scene {
     this.load.image("victoria2", "public/assets/images/pop ups victoria derrota/Victoria Ciudad.png");
     this.load.image("derrota2", "public/assets/images/pop ups victoria derrota/Derrota Ciudad.png");
     this.load.image("botone", "public/assets/images/pop ups victoria derrota/boton2.png");
+    this.load.image("botone2", "public/assets/images/pop ups victoria derrota/boton_de_ciudad.png");
     this.load.image("banderaTablero", "public/assets/images/Victoria tablero.png");
     this.load.image("banderaEsc", "public/assets/images/Victoria jungla.png");
     this.load.image("roca", "public/assets/images/PIEDRAS2.png");

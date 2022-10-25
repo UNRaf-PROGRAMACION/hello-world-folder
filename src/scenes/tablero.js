@@ -60,15 +60,19 @@ export class Tablero extends Phaser.Scene {
       this.physics.add.collider(final, worldLayer);
       
       let letrero
+      let cara
 
       if (turno===0) {
         this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
         this.player.setScale(1.1);
         letrero = "Turno Jugador 1"
+        cara = "cara1"
       }else{
         this.cameras.main.startFollow(this.player2, true, 0.08, 0.08);
         this.player2.setScale(1.1);
         letrero = "Turno Jugador 2"
+        cara = "cara2"
+
       }
        
       this.cameras.main.setZoom(2);
@@ -85,7 +89,7 @@ export class Tablero extends Phaser.Scene {
         audio2.pause();
       }
 
-      let musica = this.add.image(1395, 310 ,iconoSonido).setInteractive()
+      let parlante2 = this.add.image(1395, 310 ,iconoSonido).setInteractive()
       
       .on('pointerdown', () => {
 
@@ -93,40 +97,42 @@ export class Tablero extends Phaser.Scene {
           iconoSonido= "mute2"
           this.contar = 1
           audio2.pause()
-          musica.setTexture("mute2")
+          parlante2.setTexture(iconoSonido)
         }else{
           if (this.contar === 1){
             iconoSonido= "music2"
             this.contar = 0
             audio2.resume()
-            musica.setTexture("music2")
+            parlante2.setTexture(iconoSonido)
           }
         }
       })
 
       .on('pointerover', () => {
-        musica.setScale(1.1)
+        parlante2.setScale(1.1)
       })
 
       .on('pointerout', () => {
-        musica.setScale(1)
+        parlante2.setScale(1)
       })
 
-      musica.setScrollFactor(0);
+      parlante2.setScrollFactor(0);
 
       this.physics.add.overlap(this.player, final, this.hitFinal, null, this);
       this.physics.add.overlap(this.player2, final, this.hitFinal2, null, this);
 
-      let cartelTurno = this.add.text(780, 280, letrero, { stroke: 'black', strokeThickness: 5, fontSize: '54px Arial', fill: 'white' });
+      this.add.image(960, 320  ,"turnoJugador").setScrollFactor(0)
+      let pj = this.add.image(1150, 320  ,cara).setScrollFactor(0)
+      let cartelTurno = this.add.text(790, 290, letrero, { stroke: 'black', strokeThickness: 5, fontSize: '50px Arial', fill: 'white' });
       cartelTurno.setScrollFactor(0);
 
 
-      boton = this.add.image(535, 320  ,"dado").setInteractive()
+      boton = this.add.image(540, 325  ,"dado").setInteractive()
 
       
       .on('pointerdown', () => {
         
-        musica.destroy()
+        parlante2.destroy()
         boton.destroy()
         this.updateTexto()
 
@@ -146,6 +152,10 @@ export class Tablero extends Phaser.Scene {
         setTimeout(() => {
           letrero = "Turno Jugador 2"
           cartelTurno.setText(letrero)
+
+          cara="cara2"
+          pj.setTexture(cara)
+          
           this.cameras.main.startFollow(this.player2)
           this.player2.setScale(1.1)
           }, 5000)
@@ -173,6 +183,10 @@ export class Tablero extends Phaser.Scene {
         setTimeout(() => {
           letrero = "Turno Jugador 1"
           cartelTurno.setText(letrero)
+
+          cara="cara1"
+          pj.setTexture(cara)
+
           this.cameras.main.startFollow(this.player)
           this.player.setScale(1.1)
           }, 5000)
@@ -215,7 +229,7 @@ export class Tablero extends Phaser.Scene {
     hitFinal(player, final){
 
       boton.destroy();
-      musica.destroy();
+      parlante2.destroy();
       setTimeout(() => {
         this.add.image(distancia -400, this.player.y-100, "completo");
 
@@ -241,7 +255,7 @@ export class Tablero extends Phaser.Scene {
     hitFinal2(player2, final){
 
       boton.destroy();
-      musica.destroy();
+      parlante2.destroy();
       setTimeout(() => {
         this.add.image(distancia2 -400, this.player2.y-100, "completo");
 
