@@ -215,7 +215,7 @@ export class Escenario1 extends Phaser.Scene {
     hitFinal(player,final) {
       texto.destroy();
       
-
+      
       this.physics.pause();
       player.anims.play("jump");
       let victory=this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y, "victoria");

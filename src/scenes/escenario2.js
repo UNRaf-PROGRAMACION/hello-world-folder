@@ -71,7 +71,7 @@ export class Escenario2 extends Phaser.Scene {
       isJumping = false;
 
       const spawnPoint2 = map2.findObject("Objetos", (obj) => obj.name === "final");
-      final = this.physics.add.sprite(spawnPoint2.x, spawnPoint2.y, "banderaEsc");
+      final = this.physics.add.sprite(spawnPoint2.x, spawnPoint2.y, "banderaciudad");
 
       cursors = this.input.keyboard.createCursorKeys();
     
@@ -210,8 +210,8 @@ export class Escenario2 extends Phaser.Scene {
       this.cameras.main.stopFollow();
       this.physics.pause();
       player.anims.play("jump2");
-      let victory = this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y, "victoria2");
-      let boton = this.add.image(this.cameras.main.midPoint.x - 13,this.cameras.main.midPoint.y+150, "botone").setInteractive()
+      let victory = this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y - 45, "victoria2");
+      let boton = this.add.image(this.cameras.main.midPoint.x - 19,this.cameras.main.midPoint.y + 118, "botone2").setInteractive()
 
       .on('pointerdown', () => {
         audio3.stop()
@@ -260,8 +260,8 @@ export class Escenario2 extends Phaser.Scene {
         player.setTint(0xff0000);
         player.anims.play("jump2");
 
-        let derrota =this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "derrota2")
-        let boton =this.add.image(this.cameras.main.midPoint.x -13,this.cameras.main.midPoint.y + 130, "botone").setInteractive()
+        let derrota =this.add.image(this.cameras.main.midPoint.x - 6 ,this.cameras.main.midPoint.y - 45, "derrota2")
+        let boton =this.add.image(this.cameras.main.midPoint.x - 19,this.cameras.main.midPoint.y + 130, "botone2").setInteractive()
         .on('pointerdown', () => {
 
           audio3.stop()

@@ -37,6 +37,7 @@ export class Preloads extends Phaser.Scene {
     this.load.image("botone2", "public/assets/images/pop ups victoria derrota/boton_de_ciudad.png");
     this.load.image("banderaTablero", "public/assets/images/Victoria tablero.png");
     this.load.image("banderaEsc", "public/assets/images/Victoria jungla.png");
+    this.load.image("banderaciudad", "public/assets/images/victoriaciudad.png");
     this.load.image("roca", "public/assets/images/PIEDRAS2.png");
     this.load.image("roca2", "public/assets/images/PIEDRAS3.png");
     this.load.image("snake", "public/assets/images/snake.png");
@@ -49,7 +50,7 @@ export class Preloads extends Phaser.Scene {
       frameHeight: 155,
     });
     this.load.spritesheet("dude2", "public/assets/images/spritesnoche.png", {
-      frameWidth: 112.5,
+      frameWidth: 116,
       frameHeight: 155,
     });
 

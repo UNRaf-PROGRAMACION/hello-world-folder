@@ -1,3 +1,4 @@
+let parlante2;
 let number;
 let valor;
 let distancia;
@@ -26,11 +27,12 @@ export class Tablero extends Phaser.Scene {
       this.contar = data.contar;
       audio2 = data.audio2;
       console.log(data)
+
       
     }
 
     create() {
-
+      this.gameOver=false;
       const map = this.make.tilemap({ key: "map" });
 
       const tilesetBelow = map.addTilesetImage("cueva-atlas", "tilesBelow");
@@ -89,7 +91,7 @@ export class Tablero extends Phaser.Scene {
         audio2.pause();
       }
 
-      let parlante2 = this.add.image(1395, 310 ,iconoSonido).setInteractive()
+      parlante2 = this.add.image(1395, 310 ,iconoSonido).setInteractive()
       
       .on('pointerdown', () => {
 
@@ -228,12 +230,21 @@ export class Tablero extends Phaser.Scene {
 
     hitFinal(player, final){
 
+      this.gameOver = true;
+     
+      this.physics.pause();
+     
+      this.cameras.main.startFollow(this.player);
+      turno = 0;
+      
       boton.destroy();
       parlante2.destroy();
       setTimeout(() => {
-        this.add.image(distancia -400, this.player.y-100, "completo");
 
-        let otro = this.add.image(distancia -410, this.player.y + 25, "botone").setInteractive()
+        this.cameras.main.stopFollow()
+        this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "completo");
+
+        let otro = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "botone").setInteractive()
         
         .on('pointerdown', () => {
           
@@ -249,17 +260,26 @@ export class Tablero extends Phaser.Scene {
           otro.setScale(1)
         })
          
-       }, 3000)
+       }, 2000)
     }
 
     hitFinal2(player2, final){
 
+      this.gameOver = true;
+     
+      this.physics.pause();
+     
+      this.cameras.main.startFollow(this.player);
+      turno = 0;
+      
       boton.destroy();
       parlante2.destroy();
       setTimeout(() => {
-        this.add.image(distancia2 -400, this.player2.y-100, "completo");
 
-        let otro = this.add.image(distancia2 -410, this.player2.y + 25, "botone").setInteractive()
+        this.cameras.main.stopFollow()
+        this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "completo");
+
+        let otro = this.add.image(this.cameras.main.midPoint.x ,this.cameras.main.midPoint.y, "botone").setInteractive()
         
         .on('pointerdown', () => {
           
@@ -275,7 +295,7 @@ export class Tablero extends Phaser.Scene {
           otro.setScale(1)
         })
          
-       }, 3000)
+       }, 2000)
     }
 
     update(){
